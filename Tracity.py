@@ -47,8 +47,7 @@ def masuk():
                 print('Login berhasil')
             else:
                 print('Maaf, akun anda tidak tersedia')
-                email_login
-                pw_login
+                masuk()
 
 def keluar():
     print('Terima kasih telah menggunakan Tracity')
