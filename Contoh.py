@@ -21,7 +21,7 @@ while True:
         postpaid(riwayat_pembayaran)
     elif pilihan == "2":
         tampilkan_riwayat(riwayat_pembayaran)
-    elif pilihan == "2":
+    elif pilihan == "3":
         print("Terima kasih! Telah menggunakan Tracity")
         break
     else:
