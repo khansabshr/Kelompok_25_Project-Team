@@ -68,18 +68,18 @@ def keluar():
 
 run()
 
-# import datetime
+import datetime
 
-# def prepaid(riwayat):
-#     tanggal = datetime.datetime.now()
-#     nominal = float(input("harga"))
-#     riwayat.append((tanggal,nominal))
+def prepaid(riwayat):
+     tanggal = datetime.datetime.now()
+     nominal = float(input("harga"))
+     riwayat.append((tanggal,nominal))
 
-# def tampilkan_riwayat(riwayat):
-#     for pembayaran in riwayat:
-#         tanggal = pembayaran[0].strftime("%d-%m-%Y %H:%M:%S")
-#         nominal = pembayaran[1]
-#         print(f"{tanggal} - Rp{nominal}")
+def tampilkan_riwayat(riwayat):
+     for pembayaran in riwayat:
+         tanggal = pembayaran[0].strftime("%d-%m-%Y %H:%M:%S")
+         nominal = pembayaran[1]
+         print(f"{tanggal} - Rp{nominal}")
     
 # riwayat_pembayaran[]
 
