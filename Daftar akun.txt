@@ -1,2 +1,2 @@
-Email   : yuliaa@gmail.com
-Password: 23456
+dendy,12345
+dendy2,23456
