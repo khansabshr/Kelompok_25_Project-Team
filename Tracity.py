@@ -104,8 +104,3 @@ def tampilkan_riwayat(riwayat):
 # riwayat_pembayaran[]
 
 # prepaid(riwayat_pembayaran)
-
-
-
-        
-
