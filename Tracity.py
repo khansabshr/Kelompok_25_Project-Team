@@ -113,7 +113,21 @@ def pembayaran():
             postpaid()
         else :
             print(f'Maaf, pilihan {pilih} tidak tersedia')
-            print('Silakan coba lagi')    
+            print('Silakan coba lagi')   
+            
+def riwayat():
+    while True:
+        print()
+        print('[1] Riwayat Pembayaran')
+        print('[2] Riwayat Pemakaian')
+        pilih = input('Silakan pilih    :')
+        if pilih == '1':
+            pembayaran()
+        elif pilih == '2':
+            pemakaian()
+        else :
+            print(f'Maaf, pilihan {pilih} tidak tersedia')
+            print('Silakan coba lagi')  
 
 import datetime
 
@@ -122,7 +136,7 @@ def prepaid(riwayat):
      nominal = float(input("harga"))
      riwayat.append((tanggal,nominal))
      
-def tampilkan_riwayat(riwayat):
+def riwayat_pembayaran(riwayat):
      for pembayaran in riwayat:
          tanggal = pembayaran[0].strftime("%d-%m-%Y %H:%M:%S")
          nominal = pembayaran[1]
@@ -132,6 +146,12 @@ def postpaid(riwayat):
     tanggal = datetime.datetime.now()
     kwh = float(input("Masukkan jumlah pemakaian listrik dalam kwh: "))
     riwayat.append((tanggal, kwh))
+
+def riwayat_pemakaian(riwayat):
+     for pemakaian in riwayat:
+         tanggal = pembayaran[0].strftime("%d-%m-%Y %H:%M:%S")
+         kwh = float(input("Masukkan jumlah pemakaian listrik dalam kwh: "))
+         print(f"{tanggal} - {kwh}kwh")
 
 # riwayat_pembayaran[]
 
