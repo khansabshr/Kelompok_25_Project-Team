@@ -1,5 +1,5 @@
 def welcome_message():
-    print("================================================================================")
+    print('='*80)
     print("\t\t\tSELAMAT DATANG DI PROGRAM TRACITY!")
     print("\tKami adalah Platform untuk membantu payment listrik Anda secara online!")
     print('''
@@ -15,7 +15,7 @@ def welcome_message():
     ================================================================================
     ''')
     print("\tSelamat menggunakan program Track Your Electricity!")
-    print("===============================================================================")
+    print('='*80)
 
 welcome_message()
 
