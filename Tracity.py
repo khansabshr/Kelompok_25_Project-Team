@@ -2,16 +2,18 @@ def welcome_message():
     print("================================================================================")
     print("\t\t\tSELAMAT DATANG DI PROGRAM TRACITY!")
     print("\tKami adalah Platform untuk membantu payment listrik Anda secara online!")
-    print("================================================================================")
-    print("Tracity atau Track Your Electricity Program ini dirancang untuk membantu ")
-    print("Anda melacak penggunaan listrik Anda. Dengan program ini, Anda dapat dengan")
-    print("mudah memantau konsumsi listrik Anda dan mengidentifikasi area di mana Anda.")
-    print("dapat menghemat energi")
-    print("===============================================================================")
-    print("Kami menyediakan berbagai opsi pembayaran untuk kenyamanan Anda:")
-    print("1. Prepaid")
-    print("2. Postpaid")
-    print("===============================================================================")
+    print('''
+    ================================================================================
+    Tracity atau Track Your Electricity Program ini dirancang untuk membantu
+    Anda melacak penggunaan listrik Anda. Dengan program ini, Anda dapat dengan
+    mudah memantau konsumsi listrik Anda dan mengidentifikasi area di mana Anda
+    dapat menghemat energi
+    ================================================================================
+    Kami menyediakan berbagai opsi pembayaran untuk kenyamanan Anda:")
+    1. Prepaid
+    2. Postpaid
+    ================================================================================
+    ''')
     print("\tSelamat menggunakan program Track Your Electricity!")
     print("===============================================================================")
 
