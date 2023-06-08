@@ -29,8 +29,8 @@ def daftar():
     with open("Daftar akun.txt","r") as file:
         for line in file:
             data = line.strip().split(",")
-            if data[0] ==email_daftar:
-                print("Pendaftaran gagal. Email sudaf terdaftar.")
+            if data[0] == email_daftar:
+                print("Pendaftaran gagal. Email sudah terdaftar.")
                 return
 
     password = input('Masukkan password 5 karakter berupa angka :')
@@ -59,7 +59,7 @@ def masuk():
                 print('Maaf, Email tidak terdaftar')
                 masuk()
                 return False
-    print("Maaf, Password salah")
+    print('Maaf, Password salah')
     return False
 
 def keluar():
@@ -68,19 +68,52 @@ def keluar():
 
 run()
 
+def home2():
+    while True:
+        print()
+        print('[1] Pembayaran')
+        print('[2] Riwayat')
+        pilih = input('Silakan pilih    :')
+        if pilih == '1':
+            pembayaran():
+        elif pilih == '2':
+            tampilkan_riwayat()
+        else :
+            print(f'Maaf, pilihan {pilih} tidak tersedia')
+            print('Silakan coba lagi')
+
+def pembayaran():
+    while True:
+        print()
+        print('[1] Prepaid')
+        print('[2] Postpaid')
+        pilih = input('Silakan pilih    :')
+        if pilih == '1':
+            prepaid():
+        elif pilih == '2':
+            postpaid()
+        else :
+            print(f'Maaf, pilihan {pilih} tidak tersedia')
+            print('Silakan coba lagi')    
+
 import datetime
 
 def prepaid(riwayat):
      tanggal = datetime.datetime.now()
      nominal = float(input("harga"))
      riwayat.append((tanggal,nominal))
-
+     
 def tampilkan_riwayat(riwayat):
      for pembayaran in riwayat:
          tanggal = pembayaran[0].strftime("%d-%m-%Y %H:%M:%S")
          nominal = pembayaran[1]
          print(f"{tanggal} - Rp{nominal}")
-    
+
+def postpaid(riwayat):
+    tanggal = datetime.datetime.now()
+    kwh = float(input("Masukkan jumlah pemakaian listrik dalam kwh: "))
+    riwayat.append((tanggal, kwh))
+
 # riwayat_pembayaran[]
 
 # prepaid(riwayat_pembayaran)
