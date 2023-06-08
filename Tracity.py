@@ -1,5 +1,5 @@
 def welcome_message():
-    print('='*80)
+    print('    ================================================================================')
     print("\t\t\tSELAMAT DATANG DI PROGRAM TRACITY!")
     print("\tKami adalah Platform untuk membantu payment listrik Anda secara online!")
     print('''
@@ -14,19 +14,17 @@ def welcome_message():
     2. Postpaid
     ================================================================================
     ''')
-    print("\tSelamat menggunakan program Track Your Electricity!")
-    print('='*80)
+    print("\t\tSelamat menggunakan program Track Your Electricity!")
+    print('    ================================================================================')
 
 welcome_message()
 
 def run():
-    print('========== Track Your Electricity ==========')
-    print()
+    print('\n\n========== Track Your Electricity ==========')
     home()
 
 def home():
     while True:
-        print()
         print('[1] Masuk')
         print('[2] Daftar')
         print('[3] Keluar')
