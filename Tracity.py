@@ -94,7 +94,7 @@ def home2():
         print('[2] Riwayat')
         pilih = input('Silakan pilih    :')
         if pilih == '1':
-            pembayaran():
+            pembayaran()
         elif pilih == '2':
             tampilkan_riwayat()
         else :
@@ -108,7 +108,7 @@ def pembayaran():
         print('[2] Postpaid')
         pilih = input('Silakan pilih    :')
         if pilih == '1':
-            prepaid():
+            prepaid()
         elif pilih == '2':
             postpaid()
         else :
