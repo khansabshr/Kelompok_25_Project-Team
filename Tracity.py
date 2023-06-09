@@ -61,6 +61,9 @@ def daftar():
     with open("Daftar akun.txt","a") as file:
         file.write(f"{email_daftar},{password}\n")
 
+def keluar():
+    print('Terima kasih telah menggunakan Tracity')
+    exit()
 
 def masuk():
     print('\n========== Masuk ==========')
@@ -73,6 +76,7 @@ def masuk():
             if data[0] == email_login:
                 if data[1] == pw_login:
                     print('Login berhasil')
+                    home2()
                     return True
             else:
                 print('Maaf, Email tidak terdaftar')
@@ -80,12 +84,6 @@ def masuk():
                 return False
     print('Maaf, Password salah')
     return False
-
-def keluar():
-    print('Terima kasih telah menggunakan Tracity')
-    exit()
-
-run()
 
 def home2():
     while True:
@@ -130,44 +128,29 @@ def tampilkan_riwayat():
             print('Silakan coba lagi')  
 
 import datetime
-
+        
 def prepaid(riwayat):
      tanggal = datetime.datetime.now()
      bayar = float(input("harga"))
-     riwayat.append((tanggal,nominal))
-     
-def riwayat_pembayaran(riwayat):
-     for pembayaran in riwayat:
-             with open("Daftar akun.txt","r") as file:
-                  tanggal = pembayaran[0].strftime("%d-%m-%Y %H:%M:%S")
-                  nominal = pembayaran[1]
-                  print(f"{tanggal} - Rp{bayar}")
+     riwayat.append((tanggal,bayar))
         
-def hitung(kwh):
-    return kwh*2000
-        
-def postpaid(riwayat):
+def postpaid():
     tanggal = datetime.datetime.now()
     kwh = float(input("Masukkan jumlah pemakaian listrik dalam kwh: "))
-    riwayat.append((tanggal, kwh))
-    total = hitung(kwh)
+    total = kwh * 2000
     email = input("Masukkan email login:   ")
     print("Email: ", email)
     print("Total tagihan Anda sebesar Rp", total)
     bayar = float(input("Masukan jumlah pembayaran Anda: "))
     sisa_tagihan = total - bayar
-    print("Sisa tagihan Anda sebesar Rp", sisa_tagihan)
+    if sisa_tagihan <= 0 :
+        print("Tagihan Anda sudah terbayar penuh")
+    else:
+        print("Sisa tagihan Anda sebesar Rp", sisa_tagihan)
+        home3()
     with open('Daftar akun.txt', 'a') as file:
         file.write(f"{kwh},{total}\n")
         file.write(f"{tanggal}, {bayar}, {sisa_tagihan}\n")
-
-def riwayat_pemakaian(riwayat):
-     for pemakaian in riwayat:
-            with open("Daftar akun.txt","r") as file:
-                tanggal = pembayaran[0].strftime("%d-%m-%Y %H:%M:%S")
-                kwh = float(input("Masukkan jumlah pemakaian listrik dalam kwh: "))
-                print(f"{tanggal} - {kwh}kwh")
-        
 
 def home3():
     while True:
@@ -176,12 +159,30 @@ def home3():
         print('[2] Tidak')
         pilih = input('Silakan pilih    :')
         if pilih == "1":
-            if ya():
-                print(int(input("Masukkan nomor kartu kredit Anda: ")))
-                print("Pembayaran Anda sedang diproses...")
-                print("Pembayaran dengan kartu kredit berhasil!")
+            ya()
         elif pilih == "2":
             keluar()
         else :
             print(f'Maaf, pilihan {pilih} tidak tersedia')
             print('Silakan coba lagi')
+
+def ya():
+    print(int(input("Masukkan nomor kartu kredit Anda: ")))
+    print("Pembayaran Anda sedang diproses...")
+    print("Pembayaran dengan kartu kredit berhasil!")
+
+def riwayat_pemakaian(riwayat):
+     for pemakaian in riwayat:
+            with open("Daftar akun.txt","r") as file:
+                tanggal = pembayaran[0].strftime("%d-%m-%Y %H:%M:%S")
+                kwh = float(input("Masukkan jumlah pemakaian listrik dalam kwh: "))
+                print(f"{tanggal} - {kwh}kwh")
+     
+def riwayat_pembayaran(riwayat):
+     for pembayaran in riwayat:
+             with open("Daftar akun.txt","r") as file:
+                  tanggal = pembayaran[0].strftime("%d-%m-%Y %H:%M:%S")
+                  bayar = pembayaran[1]
+                  print(f"{tanggal} - Rp{bayar}")
+
+run()
