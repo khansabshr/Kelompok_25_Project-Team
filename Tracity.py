@@ -141,17 +141,33 @@ def tampilkan_riwayat(riwayat):
          tanggal = pembayaran[0].strftime("%d-%m-%Y %H:%M:%S")
          nominal = pembayaran[1]
          print(f"{tanggal} - Rp{nominal}")
-
+        
+def hitung(kwh):
+    return kwh*2000
+        
 def postpaid(riwayat):
     tanggal = datetime.datetime.now()
     kwh = float(input("Masukkan jumlah pemakaian listrik dalam kwh: "))
     riwayat.append((tanggal, kwh))
+    total = hitung(kwh)
+    email = input("Masukkan email login:   ")
+    print("Email: ", email)
+    print("Total tagihan Anda sebesar Rp", total)
+    bayar = float(input("Masukan jumlah pembayaran Anda: "))
+    sisa_tagihan = total - bayar
+    print("Sisa tagihan Anda sebesar Rp", sisa_tagihan)
+    with open('Daftar akun.txt', 'a') as file:
+        file.write(f"{kwh},{total}\n")
+        file.write(f"{tanggal}, {bayar}, {sisa_tagihan}\n")
 
 def tampilkan_riwayat(riwayat):
      for pemakaian in riwayat:
          tanggal = pembayaran[0].strftime("%d-%m-%Y %H:%M:%S")
          kwh = float(input("Masukkan jumlah pemakaian listrik dalam kwh: "))
          print(f"{tanggal} - {kwh}kwh")
+        
+      
+       
 
 # riwayat_pembayaran[]
 
