@@ -122,9 +122,9 @@ def tampilkan_riwayat():
         print('[2] Riwayat Pemakaian')
         pilih = input('Silakan pilih    :')
         if pilih == '1':
-            pembayaran()
+            riwayat_pembayaran()
         elif pilih == '2':
-            pemakaian()
+            riwayat_pemakaian()
         else :
             print(f'Maaf, pilihan {pilih} tidak tersedia')
             print('Silakan coba lagi')  
@@ -133,14 +133,15 @@ import datetime
 
 def prepaid(riwayat):
      tanggal = datetime.datetime.now()
-     nominal = float(input("harga"))
+     bayar = float(input("harga"))
      riwayat.append((tanggal,nominal))
      
-def tampilkan_riwayat(riwayat):
+def riwayat_pembayaran(riwayat):
      for pembayaran in riwayat:
-         tanggal = pembayaran[0].strftime("%d-%m-%Y %H:%M:%S")
-         nominal = pembayaran[1]
-         print(f"{tanggal} - Rp{nominal}")
+             with open("Daftar akun.txt","r") as file:
+                  tanggal = pembayaran[0].strftime("%d-%m-%Y %H:%M:%S")
+                  nominal = pembayaran[1]
+                  print(f"{tanggal} - Rp{bayar}")
         
 def hitung(kwh):
     return kwh*2000
@@ -160,15 +161,10 @@ def postpaid(riwayat):
         file.write(f"{kwh},{total}\n")
         file.write(f"{tanggal}, {bayar}, {sisa_tagihan}\n")
 
-def tampilkan_riwayat(riwayat):
+def riwayat_pemakaian(riwayat):
      for pemakaian in riwayat:
-         tanggal = pembayaran[0].strftime("%d-%m-%Y %H:%M:%S")
-         kwh = float(input("Masukkan jumlah pemakaian listrik dalam kwh: "))
-         print(f"{tanggal} - {kwh}kwh")
+            with open("Daftar akun.txt","r") as file:
+                tanggal = pembayaran[0].strftime("%d-%m-%Y %H:%M:%S")
+                kwh = float(input("Masukkan jumlah pemakaian listrik dalam kwh: "))
+                print(f"{tanggal} - {kwh}kwh")
         
-      
-       
-
-# riwayat_pembayaran[]
-
-# prepaid(riwayat_pembayaran)
