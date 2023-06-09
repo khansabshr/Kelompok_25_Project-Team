@@ -168,3 +168,20 @@ def riwayat_pemakaian(riwayat):
                 kwh = float(input("Masukkan jumlah pemakaian listrik dalam kwh: "))
                 print(f"{tanggal} - {kwh}kwh")
         
+
+def home3():
+    while True:
+        print('Apakah Anda ingin melakukan pembayaran?')
+        print('[1] Ya')
+        print('[2] Tidak')
+        pilih = input('Silakan pilih    :')
+        if pilih == "1":
+            if ya():
+                print(int(input("Masukkan nomor kartu kredit Anda: ")))
+                print("Pembayaran Anda sedang diproses...")
+                print("Pembayaran dengan kartu kredit berhasil!")
+        elif pilih == "2":
+            keluar()
+        else :
+            print(f'Maaf, pilihan {pilih} tidak tersedia')
+            print('Silakan coba lagi')
