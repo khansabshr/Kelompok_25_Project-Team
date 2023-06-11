@@ -44,30 +44,31 @@ def daftar():
     print('\n========== Daftar Akun ==========')
     print('\nIsi data-data berikut dengan benar')
     email_daftar = input('Masukkan email yang sudah ada             :')
-
+    while len(email_daftar) == 0:
+        print("Email tidak boleh kosong")
+        email_daftar = input('Masukkan email yang sudah ada             :')
     with open("Daftar akun.txt","r") as file:
         for line in file:
             data = line.strip().split(",")
             if data[0] == email_daftar:
                 print("Pendaftaran gagal. Email sudah terdaftar.")
                 return
-
     password = input('Masukkan password 5 karakter berupa angka :')
-    
     while len(password) !=5 or not password.isdigit():
         print("Password tidak memenuhi")
         password = input('Masukkan password 5 karakter berupa angka :')
-
     with open("Daftar akun.txt","a") as file:
         file.write(f"{email_daftar},{password}\n")
-
+    print('Akun berhasil didaftarkan\n')
+    home()
+    
 def keluar():
     print('Terima kasih telah menggunakan Tracity')
     exit()
 
 def masuk():
-    print('\n========== Masuk ==========')
-    print('\nSilakan Masukkan Akun Anda yang Sudah Terdaftar')
+    print('\n========== Masuk  ==========')
+    print('Silakan Masukkan Akun Anda yang Sudah Terdaftar')
     email_login = input('Masukkan email yang sudah ada    :')
     pw_login = input('Masukkan password                :')
     with open('Daftar akun.txt', 'r') as file:
@@ -94,14 +95,14 @@ def home2():
         if pilih == '1':
             pembayaran()
         elif pilih == '2':
-            tampilkan_riwayat()
+            riwayat()
         else :
             print(f'Maaf, pilihan {pilih} tidak tersedia')
             print('Silakan coba lagi')
 
 def pembayaran():
     while True:
-        print()
+        print('\n==========   Pembayaran  ==========')
         print('[1] Prepaid')
         print('[2] Postpaid')
         pilih = input('Silakan pilih    :')
@@ -113,9 +114,9 @@ def pembayaran():
             print(f'Maaf, pilihan {pilih} tidak tersedia')
             print('Silakan coba lagi')   
             
-def tampilkan_riwayat():
+def riwayat():
     while True:
-        print()
+        print('\n========== Riwayat ==========')
         print('[1] Riwayat Pembayaran')
         print('[2] Riwayat Pemakaian')
         pilih = input('Silakan pilih    :')
@@ -138,20 +139,15 @@ def prepaid():
     pulsa_awal = float(input("Masukkan pulsa awal: "))
     sisa_pulsa_awal = pulsa_awal
     print("Sisa pulsa awal: ", sisa_pulsa_awal)
-    
     pemakaian_listrik = float(input("Masukkan jumlah pemakaian listrik dalam kWh: "))
-    
     if pemakaian_listrik <= sisa_pulsa_awal:
         sisa_pulsa_akhir = sisa_pulsa_awal - pemakaian_listrik
         print("Sisa pulsa akhir: ", sisa_pulsa_akhir)
-        
         pembayaran = input("Apakah Anda ingin melakukan pembayaran? (Y/N): ")
-        
         if pembayaran.lower() == "y":
             nomor_kartu_kredit = input("Masukkan nomor kartu kredit: ")
             # Proses pembayaran dengan kartu kredit
             print("Pembayaran kartu kredit berhasil.")
-            
         print("Terima kasih telah menggunakan Tracity.")
     else:
         print("Pulsa anda tidak mencukupi.")
