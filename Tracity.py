@@ -157,38 +157,28 @@ def postpaid():
     tanggal = datetime.datetime.now()
     kwh = float(input("Masukkan jumlah pemakaian listrik dalam kwh: "))
     total = kwh * 2000
+    file.write(f"{kwh},{total}\n")
+    file.write(f"{tanggal}, {bayar}, {sisa_tagihan}\n")
     email = input("Masukkan email login:   ")
     print("Email: ", email)
     print("Total tagihan Anda sebesar Rp", total)
-    bayar = float(input("Masukan jumlah pembayaran Anda: "))
+    pembayaran = float(input("Apakah Anda ingin melakukan pembayaran? (Y/N): "))
+        if pembayaran.lower() == "y":
+            nomor_kartu_kredit = input("Masukkan nomor kartu kredit: ")
+            print("Pembayaran Anda sedang diproses...")
+            print("Pembayaran kartu kredit berhasil.")
     sisa_tagihan = total - bayar
     if sisa_tagihan <= 0 :
         print("Tagihan Anda sudah terbayar penuh")
+        print("Terima kasih telah menggunakan Tracity.")
     else:
         print("Sisa tagihan Anda sebesar Rp", sisa_tagihan)
-        home3()
-    with open('Daftar akun.txt', 'a') as file:
-        file.write(f"{kwh},{total}\n")
-        file.write(f"{tanggal}, {bayar}, {sisa_tagihan}\n")
-
-def home3():
-    while True:
-        print('Apakah Anda ingin melakukan pembayaran?')
-        print('[1] Ya')
-        print('[2] Tidak')
-        pilih = input('Silakan pilih    :')
-        if pilih == "1":
-            ya()
-        elif pilih == "2":
-            keluar()
-        else :
-            print(f'Maaf, pilihan {pilih} tidak tersedia')
-            print('Silakan coba lagi')
-
-def ya():
-    print(int(input("Masukkan nomor kartu kredit Anda: ")))
-    print("Pembayaran Anda sedang diproses...")
-    print("Pembayaran dengan kartu kredit berhasil!")
+    pembayaran = input("Apakah Anda ingin melakukan pembayaran? (Y/N): ")
+        if pembayaran.lower() == "y":
+            nomor_kartu_kredit = input("Masukkan nomor kartu kredit: ")
+            print("Pembayaran Anda sedang diproses...")
+            print("Pembayaran kartu kredit berhasil.")
+        print("Terima kasih telah menggunakan Tracity.")
 
 def riwayat_pemakaian(riwayat):
      for pemakaian in riwayat:
