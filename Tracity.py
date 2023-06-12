@@ -136,21 +136,15 @@ def riwayat():
             print('Silakan coba lagi')  
 
 import datetime
-        
-def prepaid(riwayat):
-     tanggal = datetime.datetime.now()
-     bayar = float(input("harga"))
-     riwayat.append((tanggal,bayar))
-        
+
 def prepaid():
     tanggal = datetime.datetime.now()
     pulsa_awal = float(input("Masukkan pulsa awal: "))
     sisa_pulsa_awal = pulsa_awal
     print("Sisa pulsa awal: ", sisa_pulsa_awal)
-    kwh= float(input("Masukkan jumlah pemakaian listrik dalam kWh: "))
-    total = kwh * 2000
-    if total <= sisa_pulsa_awal:
-        sisa_pulsa_akhir = sisa_pulsa_awal - kwh
+    pemakaian_listrik = float(input("Masukkan jumlah pemakaian listrik dalam kWh: "))
+    if pemakaian_listrik <= sisa_pulsa_awal:
+        sisa_pulsa_akhir = sisa_pulsa_awal - pemakaian_listrik
         print("Sisa pulsa akhir: ", sisa_pulsa_akhir)
         pembayaran = input("Apakah Anda ingin melakukan pembayaran? (Y/N): ")
         if pembayaran.lower() == "y":
@@ -161,12 +155,7 @@ def prepaid():
         print("Terima kasih telah menggunakan Tracity.")
     else:
         print("Pulsa anda tidak mencukupi.")
-        home3()
-    with open('Prepaid.txt', 'a') as file:
-        file.write(f"{email}, {kwh},{total}\n")
-        file.write(f"{tanggal}, {bayar}, {sisa_tagihan}\n")
-
-                 
+        
 def postpaid():
     tanggal = datetime.datetime.now()
     kwh = float(input("Masukkan jumlah pemakaian listrik dalam kwh: "))
@@ -185,14 +174,10 @@ def postpaid():
         print("Terima kasih telah menggunakan Tracity.")
     else:
         print("Sisa tagihan Anda sebesar Rp", sisa_tagihan)
-        
-        if pembayaran.lower() == "y":
-            nomor_kartu_kredit = input("Masukkan nomor kartu kredit: ")
-            print("Pembayaran Anda sedang diproses..."
-        with open('Postpaid.txt', 'a') as file:
-        file.write(f"{email},{tanggal},{pembayaran},{sisa_tagihan}\n"))
-            print("Pembayaran kartu kredit berhasil.")
-    print("Terima kasih telah menggunakan Tracity.") 
+        home3()
+    with open('Daftar akun.txt', 'a') as file:
+        file.write(f"{kwh},{total}\n")
+        file.write(f"{tanggal}, {bayar}, {sisa_tagihan}\n")
 
 def home3():
     while True:
