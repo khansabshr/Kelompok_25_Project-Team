@@ -141,12 +141,12 @@ def prepaid():
     tanggal = datetime.datetime.now()
     email = input("Masukkan email login:   ")
     pulsa_awal = float(input("Masukkan pulsa awal: "))
-    sisa_pulsa_awal = pulsa_awal/2000
-    print("Sisa pulsa awal: ", sisa_pulsa_awal)
-    kwh = float(input("Masukkan jumlah pemakaian listrik dalam kWh: "))
-    if kwh <= sisa_pulsa_awal:
-        sisa_pulsa_akhir = sisa_pulsa_awal - kwh
-        print("Sisa pulsa akhir: ", sisa_pulsa_akhir)
+    token_awal = pulsa_awal/2000
+    print("Token awal Anda: ", token_awal)
+    pemakaian_listrik = float(input("Masukkan jumlah pemakaian listrik dalam kWh: "))
+    if pemakaian_listrik <= token_awal:
+        kwh = token_awal - pemakaian_listrik
+        print("Sisa token Anda: ", kwh)
         pembayaran = input("Apakah Anda ingin melakukan pembayaran? (Y/N): ")
         if pembayaran.lower() == "y":
             nomor_kartu_kredit = input("Masukkan nomor kartu kredit: ")
@@ -156,7 +156,7 @@ def prepaid():
     else:
         print("Pulsa anda tidak mencukupi.")
     with open('Prepaid.txt', 'a') as file:
-        file.write(f"{email},{tanggal},{pembayaran},{kwh}\n")
+        file.write(f"{email},{tanggal},{pembayaran},{kwh},{pemakaian_lsitrik}\n")
         
 def postpaid():
     tanggal = datetime.datetime.now()
