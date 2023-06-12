@@ -1,3 +1,7 @@
+import modul
+from modul import input_email
+from modul import input_pw, input_email
+
 def welcome_message():
     print('    ================================================================================')
     print("\t\t\tSELAMAT DATANG DI PROGRAM TRACITY!")
@@ -27,19 +31,22 @@ def home():
     while True:
         print('[1] Masuk')
         print('[2] Daftar')
-        print('[3] Keluar')
-        pilih = input('Silakan pilih    :')
-        if pilih == "1":
-            if masuk():
+        print('[3] Keluar')      
+        try:
+            pilih = input('Silakan pilih    :')
+            option = int(pilih)
+            if option == 1:
+                masuk()
                 break
-        elif pilih == "2":
-            daftar()
-        elif pilih == "3":
-            keluar()
-        else :
-            print(f'Maaf, pilihan {pilih} tidak tersedia')
-            print('Silakan coba lagi')
-
+            elif option == 2:
+                daftar()
+            elif option == 3:
+                keluar()
+            else:
+                raise ValueError
+        except ValueError:
+            print(f"Maaf, pilihan {pilih} tidak tersedia.")
+            
 def daftar():
     print('\n========== Daftar Akun ==========')
     print('\nIsi data-data berikut dengan benar')
@@ -102,7 +109,7 @@ def home2():
 
 def pembayaran():
     while True:
-        print('\n==========   Pembayaran  ==========')
+        print('\n==========   Pembayaran   ==========')
         print('[1] Prepaid')
         print('[2] Postpaid')
         pilih = input('Silakan pilih    :')
@@ -136,22 +143,30 @@ def prepaid(riwayat):
      riwayat.append((tanggal,bayar))
         
 def prepaid():
+    tanggal = datetime.datetime.now()
     pulsa_awal = float(input("Masukkan pulsa awal: "))
     sisa_pulsa_awal = pulsa_awal
     print("Sisa pulsa awal: ", sisa_pulsa_awal)
-    pemakaian_listrik = float(input("Masukkan jumlah pemakaian listrik dalam kWh: "))
-    if pemakaian_listrik <= sisa_pulsa_awal:
-        sisa_pulsa_akhir = sisa_pulsa_awal - pemakaian_listrik
+    kwh= float(input("Masukkan jumlah pemakaian listrik dalam kWh: "))
+    total = kwh * 2000
+    if total <= sisa_pulsa_awal:
+        sisa_pulsa_akhir = sisa_pulsa_awal - kwh
         print("Sisa pulsa akhir: ", sisa_pulsa_akhir)
         pembayaran = input("Apakah Anda ingin melakukan pembayaran? (Y/N): ")
         if pembayaran.lower() == "y":
             nomor_kartu_kredit = input("Masukkan nomor kartu kredit: ")
             # Proses pembayaran dengan kartu kredit
+            print("Pembayaran Anda sedang diproses...")
             print("Pembayaran kartu kredit berhasil.")
         print("Terima kasih telah menggunakan Tracity.")
     else:
         print("Pulsa anda tidak mencukupi.")
-        
+        home3()
+    with open('Prepaid.txt', 'a') as file:
+        file.write(f"{email}, {kwh},{total}\n")
+        file.write(f"{tanggal}, {bayar}, {sisa_tagihan}\n")
+
+                 
 def postpaid():
     tanggal = datetime.datetime.now()
     kwh = float(input("Masukkan jumlah pemakaian listrik dalam kwh: "))
@@ -159,16 +174,25 @@ def postpaid():
     email = input("Masukkan email login:   ")
     print("Email: ", email)
     print("Total tagihan Anda sebesar Rp", total)
-    bayar = float(input("Masukan jumlah pembayaran Anda: "))
+    pembayaran = float(input("Apakah Anda ingin melakukan pembayaran? (Y/N): "))
+    if pembayaran.lower() == "y":
+        nomor_kartu_kredit = input("Masukkan nomor kartu kredit: ")
+        print("Pembayaran Anda sedang diproses...")
+        print("Pembayaran kartu kredit berhasil.")
     sisa_tagihan = total - bayar
     if sisa_tagihan <= 0 :
         print("Tagihan Anda sudah terbayar penuh")
+        print("Terima kasih telah menggunakan Tracity.")
     else:
         print("Sisa tagihan Anda sebesar Rp", sisa_tagihan)
-        home3()
-    with open('Daftar akun.txt', 'a') as file:
-        file.write(f"{kwh},{total}\n")
-        file.write(f"{tanggal}, {bayar}, {sisa_tagihan}\n")
+        
+        if pembayaran.lower() == "y":
+            nomor_kartu_kredit = input("Masukkan nomor kartu kredit: ")
+            print("Pembayaran Anda sedang diproses..."
+        with open('Postpaid.txt', 'a') as file:
+        file.write(f"{email},{tanggal},{pembayaran},{sisa_tagihan}\n"))
+            print("Pembayaran kartu kredit berhasil.")
+    print("Terima kasih telah menggunakan Tracity.") 
 
 def home3():
     while True:
@@ -189,18 +213,27 @@ def ya():
     print("Pembayaran Anda sedang diproses...")
     print("Pembayaran dengan kartu kredit berhasil!")
 
-def riwayat_pemakaian(riwayat):
+def riwayat_pemakaian():
      for pemakaian in riwayat:
-            with open("Daftar akun.txt","r") as file:
+            with open("Prepaid.txt","r") as file:
+                tanggal = pembayaran[0].strftime("%d-%m-%Y %H:%M:%S")
+                kwh = float(input("Masukkan jumlah pemakaian listrik dalam kwh: "))
+                print(f"{tanggal} - {kwh}kwh")
+            with open("Postpaid.txt","r") as file:
                 tanggal = pembayaran[0].strftime("%d-%m-%Y %H:%M:%S")
                 kwh = float(input("Masukkan jumlah pemakaian listrik dalam kwh: "))
                 print(f"{tanggal} - {kwh}kwh")
      
-def riwayat_pembayaran(riwayat):
+def riwayat_pembayaran():
      for pembayaran in riwayat:
-             with open("Daftar akun.txt","r") as file:
+             with open("Prepaid.txt","r") as file:
                   tanggal = pembayaran[0].strftime("%d-%m-%Y %H:%M:%S")
                   bayar = pembayaran[1]
                   print(f"{tanggal} - Rp{bayar}")
+             with open("Postpaid.txt","r") as file:
+                  tanggal = pembayaran[0].strftime("%d-%m-%Y %H:%M:%S")
+                  bayar = pembayaran[1]
+                  print(f"{tanggal} - Rp{bayar}")
+                  
 
 run()

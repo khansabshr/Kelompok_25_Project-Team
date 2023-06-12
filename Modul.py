@@ -56,4 +56,3 @@ def input_pw(prompt):
             raise AssertionError("Password salah!")
         except AssertionError as error:
             print(error)
-
