@@ -35,24 +35,15 @@ def input_email(prompt):
             return user_input
         except ValueError as error:
             print(f"Error: {str(error)}")
-            continue
         
-def input_pw(prompt):
+def password(prompt):
     count = 0
     while True: 
         try:
-            if count == 3:
-                print("Kamu gagal login")
-                break
-            count += 1
-            pw = input(f"Masukkan Password  : ")
-            assert len(pw) == 5, "Password harus terdiri dari 5 digit."
-            with open('Daftar akun.txt', 'r') as file:
-                for line in file:
-                    data = line.strip().split(",")
-                    if data[1] == pw:
-                        print("Selamat Anda sudah login")
-                        return
-            raise AssertionError("Password salah!")
-        except AssertionError as error:
-            print(error)
+            password = input(prompt)
+            if len(password) != 5 or not password.isdigit():
+                raise ValueError("Password harus terdiri dari 5 digit.")
+            return password
+        except ValueError as e:
+            print(f"Error: {str(e)}")
+        return
