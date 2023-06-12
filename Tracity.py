@@ -136,6 +136,7 @@ def prepaid(riwayat):
      riwayat.append((tanggal,bayar))
         
 def prepaid():
+    tanggal = datetime.datetime.now()
     pulsa_awal = float(input("Masukkan pulsa awal: "))
     sisa_pulsa_awal = pulsa_awal
     print("Sisa pulsa awal: ", sisa_pulsa_awal)
