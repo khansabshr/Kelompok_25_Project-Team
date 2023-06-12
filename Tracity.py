@@ -135,9 +135,10 @@ def prepaid():
     pulsa_awal = float(input("Masukkan pulsa awal: "))
     sisa_pulsa_awal = pulsa_awal
     print("Sisa pulsa awal: ", sisa_pulsa_awal)
-    pemakaian_listrik = float(input("Masukkan jumlah pemakaian listrik dalam kWh: "))
+    kwh = float(input("Masukkan jumlah pemakaian listrik dalam kWh: "))
+    total = kwh * 2000                    
     if pemakaian_listrik <= sisa_pulsa_awal:
-        sisa_pulsa_akhir = sisa_pulsa_awal - pemakaian_listrik
+        sisa_pulsa_akhir = sisa_pulsa_awal - kwh
         print("Sisa pulsa akhir: ", sisa_pulsa_akhir)
         pembayaran = input("Apakah Anda ingin melakukan pembayaran? (Y/N): ")
         if pembayaran.lower() == "y":
