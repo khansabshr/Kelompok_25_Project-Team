@@ -1,6 +1,5 @@
 import Modul
-from Modul import input_email
-from Modul import input_pw, input_email
+from Modul import password, input_email
 
 def welcome_message():
     print('    ================================================================================')
@@ -50,20 +49,14 @@ def home():
 def daftar():
     print('\n========== Daftar Akun ==========')
     print('\nIsi data-data berikut dengan benar')
-    email_daftar = input('Masukkan email yang sudah ada             :')
-    while len(email_daftar) == 0:
-        print("Email tidak boleh kosong")
-        email_daftar = input('Masukkan email yang sudah ada             :')
+    email_daftar = input_email('Masukkan email                               :')
     with open("Daftar akun.txt","r") as file:
         for line in file:
             data = line.strip().split(",")
-            if data[0] == email_daftar:
+            if len(data)==2 and data[0] == email_daftar:
                 print("Pendaftaran gagal. Email sudah terdaftar.")
                 return
-    password = input('Masukkan password 5 karakter berupa angka :')
-    while len(password) !=5 or not password.isdigit():
-        print("Password tidak memenuhi")
-        password = input('Masukkan password 5 karakter berupa angka :')
+    pw_daftar = password('Masukkan password (5 digit)           :')
     with open("Daftar akun.txt","a") as file:
         file.write(f"{email_daftar},{password}\n")
     print('Akun berhasil didaftarkan\n')
@@ -76,23 +69,24 @@ def keluar():
 def masuk():
     print('\n========== Masuk  ==========')
     print('Silakan Masukkan Akun Anda yang Sudah Terdaftar')
-    email_login = input('Masukkan email yang sudah ada    :')
-    pw_login = input('Masukkan password                :')
+    email_login = input_email('Masukkan email yang terdaftar    :')
+    coba = 0
     with open('Daftar akun.txt', 'r') as file:
         for line in file:
             data = line.strip().split(",")
-            if data[0] == email_login:
+            if len(data)==2 and data[0] == email_login:
+                while coba < 3:
+                    pw_login = input('Masukkan password                :')
                 if data[1] == pw_login:
                     print('Login berhasil')
                     home2()
                     return True
             else:
-                print('Maaf, Email tidak terdaftar')
-                masuk()
-                return False
-    print('Maaf, Password salah')
-    return False
-
+                coba += 1
+                print('Password salah')
+        print('Gagal login. Terlalu banyak percobaan')
+        return False
+            
 def home2():
     while True:
         print()
