@@ -37,7 +37,6 @@ def input_email(prompt):
             print(f"Error: {str(error)}")
         
 def password(prompt):
-    count = 0
     while True: 
         try:
             password = input(prompt)
@@ -46,4 +45,3 @@ def password(prompt):
             return password
         except ValueError as e:
             print(f"Error: {str(e)}")
-        return

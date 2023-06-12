@@ -49,7 +49,7 @@ def home():
 def daftar():
     print('\n========== Daftar Akun ==========')
     print('\nIsi data-data berikut dengan benar')
-    email_daftar = input_email('Masukkan email                               :')
+    email_daftar = input_email('Masukkan email                        :')
     with open("Daftar akun.txt","r") as file:
         for line in file:
             data = line.strip().split(",")
@@ -58,9 +58,9 @@ def daftar():
                 return
     pw_daftar = password('Masukkan password (5 digit)           :')
     with open("Daftar akun.txt","a") as file:
-        file.write(f"{email_daftar},{password}\n")
-    print('Akun berhasil didaftarkan\n')
-    home()
+        file.write(f"{email_daftar},{pw_daftar}\n")
+        print('Akun berhasil didaftarkan\n')
+        home()
     
 def keluar():
     print('Terima kasih telah menggunakan Tracity')
@@ -77,15 +77,15 @@ def masuk():
             if len(data)==2 and data[0] == email_login:
                 while coba < 3:
                     pw_login = input('Masukkan password                :')
-                if data[1] == pw_login:
-                    print('Login berhasil')
-                    home2()
-                    return True
-            else:
-                coba += 1
-                print('Password salah')
-        print('Gagal login. Terlalu banyak percobaan')
-        return False
+                    if data[1] == pw_login:
+                        print('Login berhasil')
+                        home2()
+                        return True
+                    else:
+                        coba += 1
+                        print('Password salah')
+                print('Gagal login. Terlalu banyak percobaan')
+                return False
             
 def home2():
     while True:

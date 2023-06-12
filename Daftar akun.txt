@@ -2,6 +2,3 @@ dendy,12345
 dendy2,23456
 yuliaa,12345
 lia@gmail.com,33445
-tara@yahoo.com,None
-yuyul@gmail.com,None
-lala@gmail.com,23456
