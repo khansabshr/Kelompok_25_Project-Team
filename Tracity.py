@@ -229,7 +229,7 @@ def riwayat_pembayaran():
             tanggal = Prepaid.tanggal(email)
             bayar = Prepaid.bayar(email)
             print(f"{email} - {tanggal} - Rp{bayar}")      
-     with open("Postpaid.py","r") as file:
+     with open("Postpaid.y","r") as file:
         for line in file:
             data = line.strip().split(",")
         if data[0] == email:
