@@ -148,6 +148,9 @@ def prepaid():
         print("Terima kasih telah menggunakan Tracity.")
     else:
         print("Pulsa anda tidak mencukupi.")
+    with open('Prepaid.txt', 'a') as file:
+        file.write(f"{email}, {kwh},{total}\n")
+        file.write(f"{tanggal}, {bayar}, {sisa_tagihan}\n")
         
 def postpaid():
     tanggal = datetime.datetime.now()
