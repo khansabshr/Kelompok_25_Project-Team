@@ -141,11 +141,11 @@ def prepaid():
     tanggal = datetime.datetime.now()
     email = input("Masukkan email login:   ")
     pulsa_awal = float(input("Masukkan pulsa awal: "))
-    sisa_pulsa_awal = pulsa_awal
+    sisa_pulsa_awal = pulsa_awal/2000
     print("Sisa pulsa awal: ", sisa_pulsa_awal)
-    pemakaian_listrik = float(input("Masukkan jumlah pemakaian listrik dalam kWh: "))
-    if pemakaian_listrik <= sisa_pulsa_awal:
-        sisa_pulsa_akhir = sisa_pulsa_awal - pemakaian_listrik
+    kwh = float(input("Masukkan jumlah pemakaian listrik dalam kWh: "))
+    if kwh <= sisa_pulsa_awal:
+        sisa_pulsa_akhir = sisa_pulsa_awal - kwh
         print("Sisa pulsa akhir: ", sisa_pulsa_akhir)
         pembayaran = input("Apakah Anda ingin melakukan pembayaran? (Y/N): ")
         if pembayaran.lower() == "y":
@@ -156,7 +156,7 @@ def prepaid():
     else:
         print("Pulsa anda tidak mencukupi.")
     with open('Prepaid.txt', 'a') as file:
-        file.write(f"{email},{tanggal},{pembayaran},{sisa_tagihan},{kwh}\n")
+        file.write(f"{email},{tanggal},{pembayaran},{kwh}\n")
         
 def postpaid():
     tanggal = datetime.datetime.now()
@@ -170,7 +170,7 @@ def postpaid():
         nomor_kartu_kredit = input("Masukkan nomor kartu kredit: ")
         print("Pembayaran Anda sedang diproses...")
         print("Pembayaran kartu kredit berhasil.")
-    sisa_tagihan = total - bayar
+    sisa_tagihan = total - pembayaran
     if sisa_tagihan <= 0 :
         print("Tagihan Anda sudah terbayar penuh")
         print("Terima kasih telah menggunakan Tracity.")
@@ -178,17 +178,14 @@ def postpaid():
         print("Sisa tagihan Anda sebesar Rp", sisa_tagihan)
         pembayaran = input("Apakah Anda ingin melakukan pembayaran? (Y/N): ")
         nomor_kartu_kredit = input("Masukkan nomor kartu kredit: ")
-            print("Pembayaran Anda sedang diproses...")
-            print("Pembayaran kartu kredit berhasil.")
+        print("Pembayaran Anda sedang diproses...")
+        print("Pembayaran kartu kredit berhasil.")
         with open('Postpaid.txt', 'a') as file:
-        file.write(f"{email},{tanggal},{pembayaran},{sisa_tagihan},{kwh}\n")
+            file.write(f"{email},{tanggal},{pembayaran},{sisa_tagihan},{kwh}\n")
         print("Terima kasih telah menggunakan Tracity.")
 
-def riwayat_pemakaian(riwayat):
-    with open('Daftar akun.txt', 'a') as file:
-        file.write(f"{kwh},{total}\n")
-        file.write(f"{tanggal}, {bayar}, {sisa_tagihan}\n")
-
+import Prepaid
+import Postpaid 
 
 def riwayat_pemakaian():
      for pemakaian in riwayat:
@@ -202,15 +199,21 @@ def riwayat_pemakaian():
                 print(f"{tanggal} - {kwh}kwh")
      
 def riwayat_pembayaran():
-     for pembayaran in riwayat:
-             with open("Prepaid.txt","r") as file:
-                  tanggal = pembayaran[0].strftime("%d-%m-%Y %H:%M:%S")
-                  bayar = pembayaran[1]
-                  print(f"{tanggal} - Rp{bayar}")
-             with open("Postpaid.txt","r") as file:
-                  tanggal = pembayaran[0].strftime("%d-%m-%Y %H:%M:%S")
-                  bayar = pembayaran[1]
-                  print(f"{tanggal} - Rp{bayar}")
+     email = input("Masukkan email login:   ")
+     with open("Prepaid.txt","r") as file:
+        for line in file:
+            data = line.strip().split(",")
+        if data[0] == email:
+            tanggal = Prepaid.tanggal(email)
+            bayar = Prepaid.bayar(email)
+            print(f"{email} - {tanggal} - Rp{bayar}")      
+     with open("Postpaid.txt","r") as file:
+        for line in file:
+            data = line.strip().split(",")
+        if data[0] == email:
+            tanggal = Prepaid.tanggal(email)
+            bayar = Prepaid.bayar(email)
+            print(f"{email} - {tanggal} - Rp{bayar}")   
                   
 
 run()
