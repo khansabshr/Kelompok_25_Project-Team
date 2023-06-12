@@ -157,27 +157,26 @@ def postpaid():
     tanggal = datetime.datetime.now()
     kwh = float(input("Masukkan jumlah pemakaian listrik dalam kwh: "))
     total = kwh * 2000
-    file.write(f"{kwh},{total}\n")
-    file.write(f"{tanggal}, {bayar}, {sisa_tagihan}\n")
     email = input("Masukkan email login:   ")
     print("Email: ", email)
     print("Total tagihan Anda sebesar Rp", total)
     pembayaran = float(input("Apakah Anda ingin melakukan pembayaran? (Y/N): "))
-        if pembayaran.lower() == "y":
-            nomor_kartu_kredit = input("Masukkan nomor kartu kredit: ")
-            print("Pembayaran Anda sedang diproses...")
-            print("Pembayaran kartu kredit berhasil.")
+    if pembayaran.lower() == "y":
+        nomor_kartu_kredit = input("Masukkan nomor kartu kredit: ")
+        print("Pembayaran Anda sedang diproses...")
+        print("Pembayaran kartu kredit berhasil.")
     sisa_tagihan = total - bayar
     if sisa_tagihan <= 0 :
         print("Tagihan Anda sudah terbayar penuh")
         print("Terima kasih telah menggunakan Tracity.")
     else:
-        print("Sisa tagihan Anda sebesar Rp", sisa_tagihan)
-    pembayaran = input("Apakah Anda ingin melakukan pembayaran? (Y/N): ")
-        if pembayaran.lower() == "y":
+        print("Sisa tagihan Anda sebesar Rp", sisa_tagihan)    
+        pembayaran = input("Apakah Anda ingin melakukan pembayaran? (Y/N): ")
             nomor_kartu_kredit = input("Masukkan nomor kartu kredit: ")
             print("Pembayaran Anda sedang diproses...")
             print("Pembayaran kartu kredit berhasil.")
+        with open('Postpaid.txt', 'a') as file:
+        file.write(f"{email},{tanggal},{pembayaran},{sisa_tagihan}\n")
         print("Terima kasih telah menggunakan Tracity.")
 
 def riwayat_pemakaian(riwayat):
