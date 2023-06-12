@@ -129,12 +129,7 @@ def riwayat():
             print('Silakan coba lagi')  
 
 import datetime
-        
-def prepaid(riwayat):
-     tanggal = datetime.datetime.now()
-     bayar = float(input("harga"))
-     riwayat.append((tanggal,bayar))
-        
+
 def prepaid():
     tanggal = datetime.datetime.now()
     pulsa_awal = float(input("Masukkan pulsa awal: "))
