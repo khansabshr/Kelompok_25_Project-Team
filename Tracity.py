@@ -1,6 +1,6 @@
-import modul
-from modul import input_email
-from modul import input_pw, input_email
+import Modul
+from Modul import input_email
+from Modul import input_pw, input_email
 
 def welcome_message():
     print('    ================================================================================')
@@ -188,15 +188,21 @@ import Prepaid
 import Postpaid 
 
 def riwayat_pemakaian():
-     for pemakaian in riwayat:
-            with open("Prepaid.txt","r") as file:
-                tanggal = pembayaran[0].strftime("%d-%m-%Y %H:%M:%S")
-                kwh = float(input("Masukkan jumlah pemakaian listrik dalam kwh: "))
-                print(f"{tanggal} - {kwh}kwh")
-            with open("Postpaid.txt","r") as file:
-                tanggal = pembayaran[0].strftime("%d-%m-%Y %H:%M:%S")
-                kwh = float(input("Masukkan jumlah pemakaian listrik dalam kwh: "))
-                print(f"{tanggal} - {kwh}kwh")
+    email = input("Masukkan email login:   ")
+    with open("Prepaid.txt","r") as file:
+        for line in file:
+            data = line.strip().split(",")
+        if data[0] == email:
+            tanggal = Prepaid.tanggal(email)
+            Kwh = Prepaid.Kwh(email)
+            print(f"{email} - {tanggal} - {Kwh}Kwh")      
+    with open("Postpaid.txt","r") as file:
+        for line in file:
+            data = line.strip().split(",")
+        if data[0] == email:
+            tanggal = Prepaid.tanggal(email)
+            Kwh = Prepaid.Kwh(email)
+            print(f"{email} - {tanggal} - {Kwh}Kwh") 
      
 def riwayat_pembayaran():
      email = input("Masukkan email login:   ")
