@@ -25,4 +25,4 @@ while True:
         print("Terima kasih! Telah menggunakan Tracity")
         break
     else:
-        print("Pilihan tidak valid. Silakan coba lagi.")
+        print("Pilihan tidak valid. Silahkan coba lagi.")
