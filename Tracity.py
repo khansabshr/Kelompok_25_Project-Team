@@ -1,5 +1,6 @@
 import Modul
 from Modul import password, input_email
+import matplotlib.pyplot as plt
 
 def welcome_message():
     print('    ================================================================================')
@@ -71,6 +72,15 @@ def masuk():
     print('Silakan Masukkan Akun Anda yang Sudah Terdaftar')
     global email_login #tambahan
     email_login = input_email('Masukkan email yang terdaftar    :')
+    with open('Daftar akun.txt', 'r') as file:
+        for line in file:
+            data = line.strip().split(",")
+            if data[0] == email_login:
+                pw_login = input('Masukkan password                :')
+            else:
+                print('Email Anda tidak valid, silahkan coba lagi')
+                masuk()
+                return False
     coba = 0
     with open('Daftar akun.txt', 'r') as file:
         for line in file:
@@ -134,7 +144,7 @@ import datetime
 
 def prepaid():
     tanggal = datetime.datetime.now()
-    email = input("Masukkan email login:   ")
+    email = email_login
     pulsa_awal = float(input("Masukkan pulsa awal: "))
     token_awal = pulsa_awal/2000
     print("Token awal Anda: ", token_awal)
@@ -162,15 +172,14 @@ def prepaid():
         else:
             print("Terima kasih telah menggunakan Tracity.")
     with open('Prepaid.txt', 'a') as file:
-        file.write(f"{email},{tanggal},{pembayaran},{kwh},{pemakaian_listrik}\n")
+        file.write(f"{email},{tanggal},{token_awal},{kwh},{pemakaian_listrik}\n")
     exit()
         
 def postpaid():
     tanggal = datetime.datetime.now()
+    email = email_login
     kwh = float(input("Masukkan jumlah pemakaian listrik dalam kwh: "))
     total = kwh * 2000
-    email = input("Masukkan email login:   ")
-    print("Email: ", email)
     print("Total tagihan Anda sebesar Rp", total)
     pembayaran = input("Apakah Anda ingin melakukan pembayaran? (Y/N): ")
     if pembayaran.lower() == "y":
@@ -189,7 +198,7 @@ def postpaid():
         pembayaran = input("Apakah Anda ingin melakukan pembayaran? (Y/N): ")
         if pembayaran.lower() == "y":
             nomor_kartu_kredit = input("Masukkan nomor kartu kredit: ")
-            bayar = input('Masukkan nominal pembayaran:')
+            bayar = input('Masukkan nominal pembayaran')
             sisa_tagihan = total - bayar
             print("Pembayaran Anda sedang diproses...")
             print("Pembayaran kartu kredit berhasil.")
@@ -199,44 +208,8 @@ def postpaid():
     with open('Postpaid.txt', 'a') as file:
         file.write(f"{email},{tanggal},{bayar},{sisa_tagihan},{kwh}\n")
     exit()
-        
 
 def riwayat_pemakaian():
-    email = input("Masukkan email login:   ")
-    with open("Prepaid.py","r") as file:
-        for line in file:
-            data = line.strip().split(",")
-        if data[0] == email:
-            tanggal = Prepaid.tanggal(email)
-            Kwh = Prepaid.Kwh(email)
-            print(f"{email} - {tanggal} - {Kwh}Kwh")      
-    with open("Postpaid.txt","r") as file:
-        for line in file:
-            data = line.strip().split(",")
-        if data[0] == email:
-            tanggal = Prepaid.tanggal(email)
-            Kwh = Prepaid.Kwh(email)
-            print(f"{email} - {tanggal} - {Kwh}Kwh") 
-     
-def riwayat_pembayaran():
-     email = input("Masukkan email login:   ")
-     with open("Prepaid.txt","r") as file:
-        for line in file:
-            data = line.strip().split(",")
-        if data[0] == email:
-            tanggal = Prepaid.tanggal(email)
-            bayar = Prepaid.bayar(email)
-            print(f"{email} - {tanggal} - Rp{bayar}")      
-     with open("Postpaid.txt","r") as file:
-        for line in file:
-            data = line.strip().split(",")
-        if data[0] == email:
-            tanggal = Prepaid.tanggal(email)
-            bayar = Prepaid.bayar(email)
-            print(f"{email} - {tanggal} - Rp{bayar}")   
-                  
-
-def riwayat_pemakaian2():
     x = []
     y = []
     with open("Prepaid.txt", "r") as file:
@@ -250,7 +223,7 @@ def riwayat_pemakaian2():
     plt.title("Grafik Pemakaian Listrik")
     plt.show()
 
-def riwayat_pembayaran2():
+def riwayat_pembayaran():
     x = []
     y = []
     with open("Prepaid.txt", "r") as file:
@@ -263,5 +236,5 @@ def riwayat_pembayaran2():
     plt.ylabel("Nominal")
     plt.title("Grafik Pembayaran")
     plt.show()
-
+   
 home()
