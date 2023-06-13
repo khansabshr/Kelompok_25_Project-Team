@@ -44,5 +44,4 @@ def password(prompt):
                 raise ValueError("Password harus terdiri dari 5 digit.")
             return password
         except ValueError as e:
-            print(f"Error: {str(e)}")
-
+            print(f"Error: {str(e)}")

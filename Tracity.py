@@ -1,5 +1,6 @@
 import Modul
 from Modul import password, input_email
+import matplotlib.pyplot as plt
 
 def welcome_message():
     print('    ================================================================================')
@@ -122,9 +123,9 @@ def riwayat():
         print('[1] Riwayat Pembayaran')
         print('[2] Riwayat Pemakaian')
         pilih = input('Silakan pilih    :')
-        if pilih == '1':
+        if pilih == "1":
             riwayat_pembayaran()
-        elif pilih == '2':
+        elif pilih == "2":
             riwayat_pemakaian()
         else :
             print(f'Maaf, pilihan {pilih} tidak tersedia')
@@ -134,7 +135,7 @@ import datetime
 
 def prepaid():
     tanggal = datetime.datetime.now()
-    email = input("Masukkan email login:   ")
+    email = email_login
     pulsa_awal = float(input("Masukkan pulsa awal: "))
     token_awal = pulsa_awal/2000
     print("Token awal Anda: ", token_awal)
@@ -146,8 +147,11 @@ def prepaid():
         pembayaran = input("Apakah Anda ingin melakukan pembayaran? (Y/N): ")
         if pembayaran.lower() == "y":
             nomor_kartu_kredit = input("Masukkan nomor kartu kredit: ")
+            bayar = int(input('Masukkan nominal pembayaran: '))
+            token_sekarang = (bayar/2000) + kwh
             print("Pembayaran Anda sedang diproses...")
             print("Pembayaran kartu kredit berhasil.")
+            print("token anda sekarang: ",token_sekarang)
             print("Terima kasih telah menggunakan Tracity.")
         else:
             print("Terima kasih telah menggunakan Tracity.")
@@ -156,26 +160,29 @@ def prepaid():
         pembayaran = input("Apakah Anda ingin melakukan pembayaran? (Y/N): ")
         if pembayaran.lower() == "y":
             nomor_kartu_kredit = input("Masukkan nomor kartu kredit: ")
+            bayar = int(input('Masukkan nominal pembayaran: '))
+            token_sekarang = (bayar/2000) + kwh
             print("Pembayaran Anda sedang diproses...")
             print("Pembayaran kartu kredit berhasil.")
+            print("token anda sekarang: ",token_sekarang)
             print("Terima kasih telah menggunakan Tracity.")
         else:
             print("Terima kasih telah menggunakan Tracity.")
     with open('Prepaid.txt', 'a') as file:
-        file.write(f"{email},{tanggal},{pembayaran},{kwh},{pemakaian_listrik}\n")
+        file.write(f"{email},{tanggal},nominal pembayaran : Rp{bayar},token Anda sekarang : {token_sekarang}kwh,\n")
     exit()
         
 def postpaid():
     tanggal = datetime.datetime.now()
     kwh = float(input("Masukkan jumlah pemakaian listrik dalam kwh: "))
     total = kwh * 2000
-    email = input("Masukkan email login:   ")
+    email = email_login
     print("Email: ", email)
     print("Total tagihan Anda sebesar Rp", total)
     pembayaran = input("Apakah Anda ingin melakukan pembayaran? (Y/N): ")
     if pembayaran.lower() == "y":
         nomor_kartu_kredit = input("Masukkan nomor kartu kredit: ")
-        bayar = int(input('Masukkan nominal pembayaran'))
+        bayar = int(input('Masukkan nominal pembayaran: '))
         sisa_tagihan = total - bayar
         print("Pembayaran Anda sedang diproses...")
         print("Pembayaran kartu kredit berhasil.")
@@ -189,7 +196,7 @@ def postpaid():
         pembayaran = input("Apakah Anda ingin melakukan pembayaran? (Y/N): ")
         if pembayaran.lower() == "y":
             nomor_kartu_kredit = input("Masukkan nomor kartu kredit: ")
-            bayar = input('Masukkan nominal pembayaran')
+            bayar = input('Masukkan nominal pembayaran: ')
             sisa_tagihan = total - bayar
             print("Pembayaran Anda sedang diproses...")
             print("Pembayaran kartu kredit berhasil.")
@@ -197,43 +204,62 @@ def postpaid():
         else:
             print("Terima kasih telah menggunakan Tracity.")
     with open('Postpaid.txt', 'a') as file:
-        file.write(f"{email},{tanggal},{bayar},{sisa_tagihan},{kwh}\n")
+        file.write(f"{email},{tanggal},nominal pembayaran : Rp{total},token yang dipakai : {kwh}kwh\n")
     exit()
-        
+
+
 
 def riwayat_pemakaian():
-    email = input("Masukkan email login:   ")
-    with open("Prepaid.py","r") as file:
+    a = []
+    b = []
+    with open("Prepaid.txt", "r") as file:
         for line in file:
             data = line.strip().split(",")
-        if data[0] == email:
-            tanggal = Prepaid.tanggal(email)
-            Kwh = Prepaid.Kwh(email)
-            print(f"{email} - {tanggal} - {Kwh}Kwh")      
-    with open("Postpaid.txt","r") as file:
+            a.append(data[1])
+            b.append(int(data[3]))
+    plt.plot(a, b)
+    plt.xlabel("Tanggal")
+    plt.ylabel("Kwh")
+    plt.title("Grafik Pemakaian Listrik Prepaid")
+    plt.show()
+    c = []
+    d = []
+    with open("Postpaid.txt", "r") as file:
         for line in file:
             data = line.strip().split(",")
-        if data[0] == email:
-            tanggal = Prepaid.tanggal(email)
-            Kwh = Prepaid.Kwh(email)
-            print(f"{email} - {tanggal} - {Kwh}Kwh") 
-     
-def riwayat_pembayaran():
-     email = input("Masukkan email login:   ")
-     with open("Prepaid.txt","r") as file:
-        for line in file:
-            data = line.strip().split(",")
-        if data[0] == email:
-            tanggal = Prepaid.tanggal(email)
-            bayar = Prepaid.bayar(email)
-            print(f"{email} - {tanggal} - Rp{bayar}")      
-     with open("Postpaid.txt","r") as file:
-        for line in file:
-            data = line.strip().split(",")
-        if data[0] == email:
-            tanggal = Prepaid.tanggal(email)
-            bayar = Prepaid.bayar(email)
-            print(f"{email} - {tanggal} - Rp{bayar}")   
-                  
+            c.append(data[1])
+            d.append(int(data[3]))
+    plt.plot(c, d)
+    plt.xlabel("Tanggal")
+    plt.ylabel("Kwh")
+    plt.title("Grafik Pemakaian Listrik Postpaid")
+    plt.show()
 
-postpaid()
+def riwayat_pembayaran():
+    e = []
+    f = []
+    with open("Prepaid.txt", "r") as file:
+        for line in file:
+            data = line.strip().split(",")
+            e.append(data[1])
+            f.append(int(data[2]))
+    plt.plot(e, f)
+    plt.xlabel("Tanggal")
+    plt.ylabel("Nominal")
+    plt.title("Grafik Pembayaran Listrik Prepaid")
+    plt.show()
+    g = []
+    h = []
+    with open("Prepaid.txt", "r") as file:
+        for line in file:
+            data = line.strip().split(",")
+            g.append(data[1])
+            h.append(int(data[2]))
+    plt.plot(g, h)
+    plt.xlabel("Tanggal")
+    plt.ylabel("Nominal")
+    plt.title("Grafik Pembayaran Listrik Postpaid")
+    plt.show()
+ 
+
+riwayat()
