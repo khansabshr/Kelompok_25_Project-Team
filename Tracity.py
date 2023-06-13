@@ -236,4 +236,32 @@ def riwayat_pembayaran():
             print(f"{email} - {tanggal} - Rp{bayar}")   
                   
 
-postpaid()
+def riwayat_pemakaian2():
+    x = []
+    y = []
+    with open("Prepaid.txt", "r") as file:
+        for line in file:
+            data = line.strip().split(",")
+            x.append(data[1])
+            y.append(int(data[4]))
+    plt.plot(x, y)
+    plt.xlabel("Tanggal")
+    plt.ylabel("Kwh")
+    plt.title("Grafik Pemakaian Listrik")
+    plt.show()
+
+def riwayat_pembayaran2():
+    x = []
+    y = []
+    with open("Prepaid.txt", "r") as file:
+        for line in file:
+            data = line.strip().split(",")
+            x.append(data[1])
+            y.append(int(data[2]))
+    plt.plot(x, y)
+    plt.xlabel("Tanggal")
+    plt.ylabel("Nominal")
+    plt.title("Grafik Pembayaran")
+    plt.show()
+
+home()
