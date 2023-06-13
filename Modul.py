@@ -45,3 +45,4 @@ def password(prompt):
             return password
         except ValueError as e:
             print(f"Error: {str(e)}")
+
