@@ -148,15 +148,15 @@ def prepaid():
     pulsa_awal = float(input("Masukkan pulsa awal     : "))
     token_awal = pulsa_awal/2000
     print("Token awal Anda: ", token_awal)
-    pemakaian_listrik = float(input("Masukkan jumlah pemakaian listrik dalam kWh: "))
+    pemakaian_listrik = float(input("Masukkan jumlah pemakaian listrik dalam kWh     : "))
     kwh = 0 #tambahan
     if pemakaian_listrik <= token_awal:
         kwh = token_awal - pemakaian_listrik
         print("Sisa token Anda: ", kwh)
         pembayaran = input("Apakah Anda ingin melakukan pembayaran? (Y/N)   : ")
         if pembayaran.lower() == "y":
-            nomor_kartu_kredit = input("Masukkan nomor kartu kredit: ")
-            bayar = int(input('Masukkan nominal pembayaran: '))
+            nomor_kartu_kredit = input("Masukkan nomor kartu kredit : ")
+            bayar = int(input('Masukkan nominal pembayaran : '))
             token_sekarang = (bayar/2000) + kwh
             print("Pembayaran Anda sedang diproses...")
             print("Pembayaran kartu kredit berhasil.")
@@ -168,8 +168,8 @@ def prepaid():
         print("Pulsa anda tidak mencukupi.")
         pembayaran = input("Apakah Anda ingin melakukan pembayaran? (Y/N)   : ")
         if pembayaran.lower() == "y":
-            nomor_kartu_kredit = input("Masukkan nomor kartu kredit: ")
-            bayar = int(input('Masukkan nominal pembayaran: '))
+            nomor_kartu_kredit = input("Masukkan nomor kartu kredit : ")
+            bayar = int(input('Masukkan nominal pembayaran : '))
             token_sekarang = (bayar/2000) + kwh
             print("Pembayaran Anda sedang diproses...")
             print("Pembayaran kartu kredit berhasil.")
@@ -189,8 +189,8 @@ def postpaid():
     print("Total tagihan Anda sebesar Rp", total)
     pembayaran = input("Apakah Anda ingin melakukan pembayaran? (Y/N)   : ")
     if pembayaran.lower() == "y":
-        nomor_kartu_kredit = input("Masukkan nomor kartu kredit: ")
-        bayar = int(input('Masukkan nominal pembayaran: '))
+        nomor_kartu_kredit = input("Masukkan nomor kartu kredit : ")
+        bayar = int(input('Masukkan nominal pembayaran : '))
         sisa_tagihan = total - bayar
         print("Pembayaran Anda sedang diproses...")
         print("Pembayaran kartu kredit berhasil.")
@@ -203,8 +203,8 @@ def postpaid():
         print("Sisa tagihan Anda sebesar Rp", sisa_tagihan)
         pembayaran = input("Apakah Anda ingin melakukan pembayaran? (Y/N)   : ")
         if pembayaran.lower() == "y":
-            nomor_kartu_kredit = input("Masukkan nomor kartu kredit: ")
-            bayar = input('Masukkan nominal pembayaran: ')
+            nomor_kartu_kredit = input("Masukkan nomor kartu kredit : ")
+            bayar = input('Masukkan nominal pembayaran : ')
             sisa_tagihan = total - bayar
             print("Pembayaran Anda sedang diproses...")
             print("Pembayaran kartu kredit berhasil.")
