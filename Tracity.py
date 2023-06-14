@@ -106,16 +106,20 @@ def masuk():
 def home2():
     while True:
         print()
-        print('[1] Pembayaran')
-        print('[2] Riwayat')
-        pilih = input('Silakan pilih    :')
-        if pilih == '1':
-            pembayaran()
-        elif pilih == '2':
-            riwayat()
-        else :
-            print(f'Maaf, pilihan {pilih} tidak tersedia')
-            print('Silakan coba lagi')
+        print(f"{fonts('[1]', color='pink')} Pembayaran")
+        print(f"{fonts('[2]', color='pink')} Riwayat")
+        try:
+            pilih = input('Silakan pilih    : ')
+            option = int(pilih)
+            if option == 1:
+                pembayaran()                                            
+            elif option == 2:
+                riwayat()
+            else :
+                raise ValueError
+        except ValueError:
+            print(f"Maaf, pilihan {pilih} tidak tersedia.")
+            print('Silakan coba lagi\n')
 
 def pembayaran():
     while True:
