@@ -3,25 +3,27 @@ from Modul import input_email, password, input_yn, fonts, input_kredit
 import matplotlib.pyplot as plt
 
 def welcome_message():
-    print('    ================================================================================')
-    print("\t\t\tSELAMAT DATANG DI PROGRAM TRACITY!")
-    print("\tKami adalah Platform untuk membantu payment listrik Anda secara online!")
-    print('''
-    ================================================================================
-    Tracity atau Track Your Electricity Program ini dirancang untuk membantu
-    Anda melacak penggunaan listrik Anda. Dengan program ini, Anda dapat dengan
-    mudah memantau konsumsi listrik Anda dan mengidentifikasi area di mana Anda
-    dapat menghemat energi
-    ================================================================================
-    Kami menyediakan berbagai opsi pembayaran untuk kenyamanan Anda:")
-    1. Prepaid
-    2. Postpaid
-    ================================================================================
-    ''')
-    print("\t\tSelamat menggunakan program Track Your Electricity!")
-    print('    ================================================================================')
-
-welcome_message()
+    print()
+    garis = fonts('='*80, color='blue',style='bold')
+    text1 = fonts("SELAMAT DATANG DI PROGRAM TRACITY!", color='yellow', style='bold')
+    text2 = ('Kami adalah Platform untuk membantu payment listrik Anda secara online!')
+    text3 = fonts('Selamat menggunakan program Track Your Electricity!', color='yellow')
+    print(fonts(garis.center(80)))
+    print(fonts(text1.center(90)))                                                      
+    print(fonts(text2.center(80)))
+    print(fonts(garis.center(80)))
+    print('''Tracity atau Track Your Electricity Program ini dirancang untuk membantu
+Anda melacak penggunaan listrik Anda. Dengan program ini, Anda dapat dengan
+mudah memantau konsumsi listrik Anda dan mengidentifikasi area di mana Anda
+dapat menghemat energi''')
+    print(fonts(garis.center(80)))
+    print('''Kami menyediakan berbagai opsi pembayaran untuk kenyamanan Anda dan riwayat
+yang bisa diakses kapan saja!
+1. Prepaid
+2. Postpaid''')
+    print(fonts(garis.center(80)))
+    print(fonts(text3.center(90)))
+    print(fonts(garis.center(80)))
 
 def run():
     print('\n\n========== Track Your Electricity ==========')
@@ -29,6 +31,9 @@ def run():
 
 def home():
     while True:
+        print(f"{fonts('[1]', color='pink')} Masuk")
+        print(f"{fonts('[2]', color='pink')} Daftar")
+        print(f"{fonts('[3]', color='pink')} Keluar")
         print('[1] Masuk')
         print('[2] Daftar')
         print('[3] Keluar')      
@@ -70,7 +75,7 @@ def keluar():
 def masuk():
     print('\n========== Masuk  ==========')
     print('Silakan Masukkan Akun Anda yang Sudah Terdaftar')
-    global email_login #tambahan
+    global email_login 
     email_login = input_email('Masukkan email yang terdaftar    :')
     with open('Daftar akun.txt', 'r') as file:
         for line in file:
