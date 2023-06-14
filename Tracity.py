@@ -153,15 +153,14 @@ def prepaid():
     if pemakaian_listrik <= token_awal:
         kwh = token_awal - pemakaian_listrik
         print("Sisa token Anda: ", kwh)
-        pembayaran = input("Apakah Anda ingin melakukan pembayaran? (Y/N)   : ")
-        if pembayaran.lower() == "y":
-            nomor_kartu_kredit = input("Masukkan nomor kartu kredit : ")
+        pembayaran = input_yn("Apakah Anda ingin melakukan pembayaran? (Y/N)   : ")
+       if pembayaran == "y":                                                      
+            nomor_kartu_kredit = input_kredit("Masukkan nomor kartu kredit : ")     
             bayar = int(input('Masukkan nominal pembayaran : '))
             token_sekarang = (bayar/2000) + kwh
-            print("Pembayaran Anda sedang diproses...")
+            print(fonts("Pembayaran Anda sedang diproses...", color='yellow', style='italic')) #tambahan
             print("Pembayaran kartu kredit berhasil.")
-            print("token anda sekarang: ",token_sekarang)
-            print("Terima kasih telah menggunakan Tracity.")
+            print("Token anda sekarang: ",token_sekarang)           
         else:
             print("Terima kasih telah menggunakan Tracity.")
     else:
