@@ -1,5 +1,5 @@
 import Modul
-from Modul import password, input_email
+from Modul import input_email, password, input_yn, fonts, input_kredit
 import matplotlib.pyplot as plt
 
 def welcome_message():
