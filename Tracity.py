@@ -26,6 +26,7 @@ yang bisa diakses kapan saja!
     print(fonts(garis.center(80)))
 
 def run():
+    welcome_massage()
     print('\n\n========== Track Your Electricity ==========')
     home()
 
