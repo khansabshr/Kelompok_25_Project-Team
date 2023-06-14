@@ -45,3 +45,21 @@ def password(prompt):
             return password
         except ValueError as e:
             print(f"Error: {str(e)}")
+
+def input_yn(prompt):
+    while True:
+        user_input = input(prompt).lower()
+        if user_input == 'y' or user_input == 'n':
+            return user_input
+        else:
+            print("Masukkan hanya dapat berupa 'Y' atau 'N'. Silakan coba lagi.\n")
+            
+def input_kredit(prompt):
+    while True:
+        try:
+            kartu_kredit = input(prompt)
+            if len(kartu_kredit) < 14 or len(kartu_kredit) > 16 or not kartu_kredit.isdigit():
+                raise ValueError("Nomor kartu kredit harus terdiri dari 14 hingga 16 digit angka.\n")
+            return kartu_kredit
+        except ValueError as e:
+            print(f"Error: {str(e)}")
