@@ -33,10 +33,7 @@ def home():
     while True:
         print(f"{fonts('[1]', color='pink')} Masuk")
         print(f"{fonts('[2]', color='pink')} Daftar")
-        print(f"{fonts('[3]', color='pink')} Keluar")
-        print('[1] Masuk')
-        print('[2] Daftar')
-        print('[3] Keluar')      
+        print(f"{fonts('[3]', color='pink')} Keluar")  
         try:
             pilih = input('Silakan pilih    :')
             option = int(pilih)
@@ -162,25 +159,27 @@ def prepaid():
     if pemakaian_listrik <= token_awal:
         kwh = token_awal - pemakaian_listrik
         print("Sisa token Anda: ", kwh)
-        pembayaran = input_yn("Apakah Anda ingin melakukan pembayaran? (Y/N)   : ")
-       if pembayaran == "y":                                                      
+        pembayaran = input_yn("Apakah Anda ingin melakukan pembayaran? (Y/N)   : ") 
+        if pembayaran == "y":                                                       
+            nomor_kartu_kredit = input_kredit("Masukkan nomor kartu kredit : ")    
+            bayar = int(input('Masukkan nominal pembayaran : '))
+            token_sekarang = (bayar/2000) + kwh
+            print(fonts("Pembayaran Anda sedang diproses...", color='yellow', style='italic')) #tambahan
+            print("Pembayaran kartu kredit berhasil.")
+            print("Token anda sekarang: ",token_sekarang)                           
+            print("Terima kasih telah menggunakan Tracity.")
+        else:
+            print("Terima kasih telah menggunakan Tracity.")
+    else:
+        print("Pulsa anda tidak mencukupi.")
+        pembayaran = input_yn("Apakah Anda ingin melakukan pembayaran? (Y/N)   : ") 
+        if pembayaran == "y":                                                       
             nomor_kartu_kredit = input_kredit("Masukkan nomor kartu kredit : ")     
             bayar = int(input('Masukkan nominal pembayaran : '))
             token_sekarang = (bayar/2000) + kwh
-            print(fonts("Pembayaran Anda sedang diproses...", color='yellow', style='italic')) 
+            print(fonts("Pembayaran Anda sedang diproses...", color='yellow', style='italic')) #tambahan
             print("Pembayaran kartu kredit berhasil.")
-            print("Token anda sekarang: ",token_sekarang)           
-            print("Terima kasih telah menggunakan Tracity.")
-        else:
-            print("Pulsa anda tidak mencukupi.")
-        pembayaran = input_yn("Apakah Anda ingin melakukan pembayaran? (Y/N)   : ") 
-         if pembayaran == "y":                                                       #TAMBAHAN
-            nomor_kartu_kredit = input_kredit("Masukkan nomor kartu kredit : ")
-            bayar = int(input('Masukkan nominal pembayaran : '))
-            token_sekarang = (bayar/2000) + kwh
-            print(fonts("Pembayaran Anda sedang diproses...", color='yellow', style='italic'))
-            print("Pembayaran kartu kredit berhasil.")
-            print("Token anda sekarang: ",token_sekarang)                      
+            print("Token anda sekarang: ",token_sekarang)                           #tambahan
             print("Terima kasih telah menggunakan Tracity.")
         else:
             print("Terima kasih telah menggunakan Tracity.")
