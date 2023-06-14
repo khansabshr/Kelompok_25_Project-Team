@@ -170,9 +170,8 @@ def prepaid():
             print(fonts("Pembayaran Anda sedang diproses...", color='yellow', style='italic')) 
             print("Pembayaran kartu kredit berhasil.")
             print("Token anda sekarang: ",token_sekarang)           
-        else:
             print("Terima kasih telah menggunakan Tracity.")
-    else:
+        else:
             print("Pulsa anda tidak mencukupi.")
         pembayaran = input_yn("Apakah Anda ingin melakukan pembayaran? (Y/N)   : ") 
          if pembayaran == "y":                                                       #TAMBAHAN
