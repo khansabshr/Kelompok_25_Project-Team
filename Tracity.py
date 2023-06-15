@@ -140,8 +140,8 @@ def pembayaran():
 def riwayat():
     while True:
         print('\n========== Riwayat ==========')
-        print('[1] Riwayat Pembayaran')
-        print('[2] Riwayat Pemakaian')
+        print(f"{fonts('[1]', color='pink')} Riwayat Pembayaran")
+        print(f"{fonts('[2]', color='pink')} Riwayat Pemakaian")
         pilih = input('Silakan pilih    :')
         if pilih == "1":
             riwayat_pembayaran()
