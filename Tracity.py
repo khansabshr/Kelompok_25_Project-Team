@@ -54,17 +54,17 @@ def daftar():
     print('\n========== Daftar Akun ==========')
     print('\nIsi data-data berikut dengan benar')
     email_daftar = input_email('Masukkan email                        :')
-    with open("Daftar akun.txt","r") as file:
+    with open("Daftar akun.txt", "r") as file:
         for line in file:
             data = line.strip().split(",")
-            if len(data)==2 and data[0] == email_daftar:
+            if len(data) == 2 and data[0] == email_daftar:
                 print("Pendaftaran gagal. Email sudah terdaftar.")
                 return
     pw_daftar = password('Masukkan password (5 digit)           :')
-    with open("Daftar akun.txt","a") as file:
+    with open("Daftar akun.txt", "a") as file:
         file.write(f"{email_daftar},{pw_daftar}\n")
-        print('Akun berhasil didaftarkan\n')
-        home()
+    print('Akun berhasil didaftarkan\n')
+    home()
     
 def keluar():
     print('Terima kasih telah menggunakan Tracity')
