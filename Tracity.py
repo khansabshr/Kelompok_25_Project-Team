@@ -122,16 +122,20 @@ def home2():
 def pembayaran():
     while True:
         print('\n==========   Pembayaran   ==========')
-        print('[1] Prepaid')
-        print('[2] Postpaid')
-        pilih = input('Silakan pilih    :')
-        if pilih == '1':
-            prepaid()
-        elif pilih == '2':
-            postpaid()
-        else :
-            print(f'Maaf, pilihan {pilih} tidak tersedia')
-            print('Silakan coba lagi')   
+        print(f"{fonts('[1]', color='pink')} Prepaid")
+        print(f"{fonts('[2]', color='pink')} Postpaid")
+        try:
+            pilih = input('Silakan pilih    : ')
+            option = int(pilih)
+            if option == 1:
+                prepaid()
+            elif option == 2:                                       
+                postpaid()
+            else :
+                raise ValueError
+        except ValueError:
+                print(f'Maaf, pilihan {pilih} tidak tersedia')
+                print('Silakan coba lagi\n')  
             
 def riwayat():
     while True:
