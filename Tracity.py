@@ -193,12 +193,12 @@ def postpaid():
     kwh = float(input("Masukkan jumlah pemakaian listrik dalam kwh     : "))
     total = kwh * 2000
     print("Total tagihan Anda sebesar Rp", total)
-    pembayaran = input("Apakah Anda ingin melakukan pembayaran? (Y/N)   : ")
-    if pembayaran.lower() == "y":
-        nomor_kartu_kredit = input("Masukkan nomor kartu kredit : ")
+    pembayaran = input_yn("Apakah Anda ingin melakukan pembayaran? (Y/N)   : ")    
+    if pembayaran == "y":                                                          
+        nomor_kartu_kredit = input_kredit("Masukkan nomor kartu kredit : ")        
         bayar = int(input('Masukkan nominal pembayaran : '))
         sisa_tagihan = total - bayar
-        print("Pembayaran Anda sedang diproses...")
+        print(fonts("Pembayaran Anda sedang diproses...", color='yellow', style='italic')) 
         print("Pembayaran kartu kredit berhasil.")
     else:
         print("Terima kasih telah menggunakan Tracity.")
@@ -207,12 +207,12 @@ def postpaid():
         print("Terima kasih telah menggunakan Tracity.")
     else:
         print("Sisa tagihan Anda sebesar Rp", sisa_tagihan)
-        pembayaran = input("Apakah Anda ingin melakukan pembayaran? (Y/N)   : ")
-        if pembayaran.lower() == "y":
-            nomor_kartu_kredit = input("Masukkan nomor kartu kredit : ")
+        pembayaran = input_yn("Apakah Anda ingin melakukan pembayaran? (Y/N)   : ") 
+        if pembayaran == "y":                                                       
+            nomor_kartu_kredit = input_kredit("Masukkan nomor kartu kredit : ")     
             bayar = input('Masukkan nominal pembayaran : ')
             sisa_tagihan = total - bayar
-            print("Pembayaran Anda sedang diproses...")
+            print(fonts("Pembayaran Anda sedang diproses...", color='yellow', style='italic'))  
             print("Pembayaran kartu kredit berhasil.")
             print("Terima kasih telah menggunakan Tracity.")
         else:
