@@ -68,8 +68,9 @@ def nominal(prompt):
     valid_input = False
     while not valid_input:
         variable = input(prompt)
-        if variable.isdigit():
+        if variable.isdigit() and int(variable) != 0:
             valid_input = True
         else:
-            print("Input harus berupa angka bulat. Silakan coba lagi.\n")
+            print('Input harus berupa angka bulat dan tidak boleh 0.')
+            print('Silakan coba lagi.\n')
     return int(variable)
