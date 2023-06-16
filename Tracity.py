@@ -1,6 +1,5 @@
 import Modul
 from Modul import input_email, password, input_yn, fonts, input_kredit, nominal
-import matplotlib.pyplot as plt
 import time
 import datetime
 
@@ -46,7 +45,7 @@ def home():
             elif option == 2:
                 daftar()
             elif option == 3:
-                print("Terima kasih! Telah menggunakan Tracity")
+                print("Terima kasih telah menggunakan Tracity!")
                 break
             else:
                 raise ValueError
@@ -77,7 +76,7 @@ def masuk():
     email_login = input_email('Masukkan email yang terdaftar    : ')
     coba = 0
     while coba < 3:
-        password = input("Masukkan password (5 digit) : ")
+        password = input("Masukkan password (5 digit)           : ")
         with open("Daftar akun.txt", "r") as file:
             for line in file:
                 data = line.strip().split(",")
