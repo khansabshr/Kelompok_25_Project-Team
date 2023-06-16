@@ -1,6 +1,3 @@
-dendy,12345
-dendy2,23456
-yuliaa,12345
 lia@gmail.com,33445
 yulia@gmail.com,22222
 aca@outlook.com,13678
