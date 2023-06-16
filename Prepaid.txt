@@ -1,11 +1,7 @@
-yulia@gmail.com,2023-06-13 09:36:19.234213,Y,5.0,20.0
-yulia@gmail.com,2023-06-13 09:43:53.334614,y,5.0,20.0
-yulia@gmail.com,2023-06-13 09:52:45.647059,y,195.0,30.0
-aca@outlook.com,2023-06-13 13:28:47.019072,y,20.0,30.0
-aca@outlook.com,2023-06-13 13:55:40.736206,token awal : 45.0, token yang dipakai : 15.0,
-aca@gmail.com,2023-06-13 14:01:07.951210,pulsa awal : Rp100000.0,token awal : 50.0kwh, token yang dipakai : 28.0kwh,
-aca@gmail.com,2023-06-13 14:08:02.373154,pulsa awal : Rp100000.0,token awal : 50.0kwh, token yang dipakai : 24.0kwh,
-
-aca@gmail.com,2023-06-13 14:14:53.309445,pulsa awal : Rp100000.0,token awal : 50.0kwh,nominal pembayaran : Rp200000,token Anda sekarang : 113.0kwh,
-aca@gmail.com,2023-06-13 14:30:03.676284,nominal pembayaran : Rp300000,token Anda sekarang : 172.0kwh,
-aca@yahoo.com,2023-06-13 14:34:39.669273,nominal pembayaran : Rp350000,token Anda sekarang : 200.0kwh,
+aragita@gmail.com,2023-06-15,12000,451.0
+aragita@gmail.com,2023-06-15,0,488.0
+aragita@gmail.com,2023-06-15,0,488.0
+hapis@gmail.com,2023-06-16,300000,150.0
+hapis@gmail.com,2023-06-16,250000,125.0
+hapis@gmail.com,2023-06-16,120000,108.0
+hapis@gmail.com,2023-06-16,0,330.0
