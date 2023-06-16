@@ -84,7 +84,7 @@ def masuk():
                 if len(data) == 2 and data[0] == email_login and data[1] == password:
                     print("Login berhasil!")
                     time.sleep(2)
-                    pembayaran()
+                    home2()
         coba += 1
         print("Password salah. Silakan coba lagi.")
     print("\nGagal login. Terlalu banyak percobaan.")
