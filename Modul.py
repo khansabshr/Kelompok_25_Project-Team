@@ -63,3 +63,13 @@ def input_kredit(prompt):
             return kartu_kredit
         except ValueError as e:
             print(f"Error: {str(e)}")
+
+def nominal(prompt):
+    valid_input = False
+    while not valid_input:
+        variable = input(prompt)
+        if variable.isdigit():
+            valid_input = True
+        else:
+            print("Input harus berupa angka bulat. Silakan coba lagi.\n")
+    return int(variable)
