@@ -7,3 +7,5 @@ aji@gmail.com,12345
 yuki@gmail.com,12345
 nurki@gmail.com,23415
 nurki2@gmail.com,12345
+hapis@gmail.com,09876
+aragita@gmail.com,12345

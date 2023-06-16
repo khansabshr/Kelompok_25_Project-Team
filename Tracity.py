@@ -188,12 +188,22 @@ def postpaid():
     tanggal = datetime.date.today()
     email = email_login
     kwh = nominal("Masukkan jumlah pemakaian listrik dalam kwh     : ")
-    total = kwh * 2000
-    print("Total tagihan Anda sebesar Rp", total)
+
+    if kwh == 0:
+        total = 0
+    else:
+        total = kwh * 2000
+        print("Total tagihan Anda sebesar Rp", total)
+
     pembayaran = input_yn("Apakah Anda ingin melakukan pembayaran? (Y/N)   : ")    
     if pembayaran == "y":                                                          
         nomor_kartu_kredit = input_kredit("Masukkan nomor kartu kredit : ")        
-        bayar = nominal('Masukkan nominal pembayaran : ')
+        bayar = 0
+        while bayar <= 0 or bayar > total:
+            bayar = nominal('Masukkan nominal pembayaran : ')
+            if bayar > total:
+                print(f"Nominal pembayaran maksimal Rp {total}. Silakan coba lagi.")
+        
         sisa_tagihan = total - bayar
         print(fonts("Pembayaran Anda sedang diproses...", color='yellow', style='italic'))
         time.sleep(2)
@@ -201,22 +211,29 @@ def postpaid():
     else:
         print("Total tagihan Anda sebesar Rp", total)
         print("Terima kasih telah menggunakan Tracity.")
-    if sisa_tagihan <= 0 :
+    
+    if total == 0 or sisa_tagihan <= 0 :
         print("Tagihan Anda sudah terbayar penuh")
         print("Terima kasih telah menggunakan Tracity.")
     else:
         print("Sisa tagihan Anda sebesar Rp", sisa_tagihan)
         pembayaran = input_yn("Apakah Anda ingin melakukan pembayaran? (Y/N)   : ") 
         if pembayaran == "y":                                                       
-            nomor_kartu_kredit = input_kredit("Masukkan nomor kartu kredit : ")     
-            bayar = nominal('Masukkan nominal pembayaran : ')
-            sisa_tagihan = total - bayar
+            nomor_kartu_kredit = input_kredit("Masukkan nomor kartu kredit : ")
+            bayar = 0
+            while bayar <= 0 or bayar > sisa_tagihan:
+                bayar = nominal('Masukkan nominal pembayaran : ')
+                if bayar > sisa_tagihan:
+                    print("Nominal pembayaran tidak valid. Silakan coba lagi.")
+                    
+            sisa_tagihan = sisa_tagihan - bayar
             print(fonts("Pembayaran Anda sedang diproses...", color='yellow', style='italic'))
             time.sleep(2)
             print(fonts("Pembayaran kartu kredit berhasil.", color='green'))
             print("Terima kasih telah menggunakan Tracity.")
         else:
             print("Terima kasih telah menggunakan Tracity.")
+    
     with open('Postpaid.txt', 'a') as file:
         file.write(f"\n{email},{tanggal},{total},{kwh}")
 
