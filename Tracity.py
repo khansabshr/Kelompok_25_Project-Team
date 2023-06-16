@@ -86,7 +86,7 @@ def masuk():
                         pw_login = password("Masukkan password (5 digit)      : ")
                         if data[1] == pw_login:
                             print("Login berhasil")
-                            home2()                                                             #TAMBAHANNNNSSS
+                            home2()                                                             
                             return True
                         else:
                             coba += 1
@@ -148,6 +148,7 @@ def riwayat():
             print('Silakan coba lagi')  
 
 import datetime
+import time
 
 def prepaid():
     tanggal = datetime.date.today()
@@ -167,7 +168,8 @@ def prepaid():
             bayar = nominal('Masukkan nominal pembayaran : ')
             token_sekarang = (bayar/2000) + kwh
             print(fonts("Pembayaran Anda sedang diproses...", color='yellow', style='italic'))
-            print("Pembayaran kartu kredit berhasil.")
+            time.sleep(3)
+            print("Pembayaran kartu kredit berhasil.", color='green')
             print("Token anda sekarang: ",token_sekarang)                           
             print("Terima kasih telah menggunakan Tracity.")
         else:
@@ -181,6 +183,7 @@ def prepaid():
             bayar = nominal('Masukkan nominal pembayaran : ')
             token_sekarang = (bayar/2000) + kwh
             print(fonts("Pembayaran Anda sedang diproses...", color='yellow', style='italic'))
+            time.sleep(3)
             print("Pembayaran kartu kredit berhasil.")
             print("Token anda sekarang: ",token_sekarang)                           
             print("Terima kasih telah menggunakan Tracity.")
@@ -201,7 +204,8 @@ def postpaid():
         nomor_kartu_kredit = input_kredit("Masukkan nomor kartu kredit : ")        
         bayar = nominal('Masukkan nominal pembayaran : ')
         sisa_tagihan = total - bayar
-        print(fonts("Pembayaran Anda sedang diproses...", color='yellow', style='italic')) 
+        print(fonts("Pembayaran Anda sedang diproses...", color='yellow', style='italic'))
+        time.sleep(3)
         print("Pembayaran kartu kredit berhasil.")
     else:
         print("Total tagihan Anda sebesar Rp", total)
@@ -216,7 +220,8 @@ def postpaid():
             nomor_kartu_kredit = input_kredit("Masukkan nomor kartu kredit : ")     
             bayar = nominal('Masukkan nominal pembayaran : ')
             sisa_tagihan = total - bayar
-            print(fonts("Pembayaran Anda sedang diproses...", color='yellow', style='italic'))  
+            print(fonts("Pembayaran Anda sedang diproses...", color='yellow', style='italic'))
+            time.sleep(3)
             print("Pembayaran kartu kredit berhasil.")
             print("Terima kasih telah menggunakan Tracity.")
         else:
