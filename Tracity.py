@@ -77,26 +77,19 @@ def masuk():
     global email_login
     email_login = input_email('Masukkan email yang terdaftar    : ')
     coba = 0
-    while True:
+    while coba < 3:
+        password = input("Masukkan password: ")
         with open("Daftar akun.txt", "r") as file:
             for line in file:
                 data = line.strip().split(",")
-                if len(data) == 2 and data[0] == email_login:
-                    while coba < 3:
-                        pw_login = password("Masukkan password (5 digit)      : ")
-                        if data[1] == pw_login:
-                            print("Login berhasil")
-                            home2()                                                             
-                            return True
-                        else:
-                            coba += 1
-                            print("Password salah.")
-                    print("Gagal login. Terlalu banyak percobaan.\n")
-                    home()
-                    return False
-            print('Email tidak terdaftar. Silakan coba lagi.\n')
-            email_login = input_email('Masukkan email yang terdaftar    : ')
-            
+                if len(data) == 2 and data[0] == email_login and data[1] == password:
+                    print("Login berhasil!")
+                    pembayaran()
+        coba += 1
+        print("Password salah. Silakan coba lagi.")
+    print("Gagal login. Terlalu banyak percobaan.")
+    home()
+    
 def home2():
     while True:
         print()
