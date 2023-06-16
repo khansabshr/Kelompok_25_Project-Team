@@ -101,7 +101,7 @@ def masuk():
                 email_login = input_email('Masukkan email yang terdaftar    : ')
         coba += 1
     if coba == 3:
-        print("Gagal login. Terlalu banyak percobaan.")
+        print("Gagal login. Terlalu banyak percobaan.\n")
         home()
     
 def home2():
