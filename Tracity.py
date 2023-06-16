@@ -134,16 +134,19 @@ def pembayaran():
 def riwayat():
     while True:
         print('\n========== Riwayat ==========')
-        print(f"{fonts('[1]', color='pink')} Riwayat Pembayaran")
-        print(f"{fonts('[2]', color='pink')} Riwayat Pemakaian")
-        pilih = input('Silakan pilih    :')
-        if pilih == "1":
-            riwayat_pembayaran()
-        elif pilih == "2":
-            riwayat_pemakaian()
-        else :
-            print(f'Maaf, pilihan {pilih} tidak tersedia')
-            print('Silakan coba lagi')  
+        print(f"{fonts('[1]', color='pink')} Riwayat Prepaid")
+        print(f"{fonts('[2]', color='pink')} Riwayat Postpaid")
+        try:
+            pilih = input('Silakan pilih    : ')
+            if pilih == '1':
+                riwayat_prepaid()                                            
+            elif pilih == '2':
+                riwayat_postpaid()
+            else :
+                raise ValueError
+        except ValueError:
+            print(f"Maaf, pilihan {pilih} tidak tersedia.")
+            print('Silakan coba lagi\n')   
 
 import datetime
 import time
@@ -227,47 +230,40 @@ def postpaid():
     with open('Postpaid.txt', 'a') as file:
         file.write(f"\n{email},{tanggal},{total},{kwh}")
 
-def riwayat_pemakaian():
-    a = []
-    b = []
-    with open("Prepaid.txt", "r") as file:
-        for line in file:
-            data = line.strip().split(",")
-            a.append(data[1])
-            b.append(int(data[3]))
-    plt.plot(a, b)
-    plt.xlabel("Tanggal")
-    plt.ylabel("Kwh")
-    plt.title("Grafik Pemakaian Listrik Prepaid")
-    plt.show()
-    c = []
-    d = []
-    with open("Postpaid.txt", "r") as file:
-        for line in file:
-            data = line.strip().split(",")
-            c.append(data[1])
-            d.append(int(data[3]))
-    plt.plot(c, d)
-    plt.xlabel("Tanggal")
-    plt.ylabel("Kwh")
-    plt.title("Grafik Pemakaian Listrik Postpaid")
-    plt.show()
-
-def riwayat_pembayaran():
-    data = []
+def riwayat_prepaid():
+    data1 = []
     with open('Prepaid.txt', 'r') as file:
         for line in file:
             line_data = line.strip().split(',')
-            data.append(line_data)
+            data1.append(line_data)
     tanggal = []
     pembayaran = []
-    for item in data:
+    for item in data1:
         tanggal.append(item[1][5:10])
         pembayaran.append(float(item[2]))
+    plt.subplot(1, 2, 1)
     plt.plot(tanggal, pembayaran)
     plt.title("Riwayat Pembayaran")
     plt.xlabel("Tanggal")
-    plt.ylabel("Pembayaran")
+    plt.ylabel("Pembayaran (dalam rupiah)")
+    plt.show()
+    # Mengambil data kedua
+    data2 = []
+    with open('Prepaid.txt', 'r') as file:
+        for line in file:
+            line_data = line.strip().split(',')
+            data2.append(line_data)
+    tanggal2 = []
+    pemakaian = []
+    for item in data2:
+        tanggal2.append(item[1][5:10])
+        pemakaian.append(float(item[3]))
+    plt.subplot(1, 2, 2)
+    plt.plot(tanggal2, pemakaian)
+    plt.title("Riwayat Pemakaian")
+    plt.xlabel("Tanggal")
+    plt.ylabel("Pemakaian (dalam kwh)")
+    plt.tight_layout()
     plt.show()
 
 
