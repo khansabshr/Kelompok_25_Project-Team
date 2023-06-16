@@ -1,6 +1,8 @@
 import Modul
 from Modul import input_email, password, input_yn, fonts, input_kredit, nominal
 import matplotlib.pyplot as plt
+import time
+import datetime
 
 def welcome_message():
     print()
@@ -84,6 +86,7 @@ def masuk():
                 data = line.strip().split(",")
                 if len(data) == 2 and data[0] == email_login and data[1] == password:
                     print("Login berhasil!")
+                    time.sleep(2)
                     pembayaran()
         coba += 1
         print("Password salah. Silakan coba lagi.")
@@ -140,9 +143,6 @@ def riwayat():
         except ValueError:
             print(f"Maaf, pilihan {pilih} tidak tersedia.")
             print('Silakan coba lagi\n')   
-
-import datetime
-import time
 
 def prepaid():
     tanggal = datetime.date.today()
