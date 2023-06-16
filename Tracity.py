@@ -250,31 +250,21 @@ def riwayat_pemakaian():
     plt.show()
 
 def riwayat_pembayaran():
-    e = []
-    f = []
-    with open("Prepaid.txt", "r") as file:
+    data = []
+    with open('Prepaid.txt', 'r') as file:
         for line in file:
-            data = line.strip().split(",")
-            e.append(data[1])
-            f.append(int(data[2]))
-    plt.plot(e, f)
+            line_data = line.strip().split(',')
+            data.append(line_data)
+    tanggal = []
+    pembayaran = []
+    for item in data:
+        tanggal.append(item[1][5:10])
+        pembayaran.append(float(item[2]))
+    plt.plot(tanggal, pembayaran)
+    plt.title("Riwayat Pembayaran")
     plt.xlabel("Tanggal")
-    plt.ylabel("Nominal")
-    plt.title("Grafik Pembayaran Listrik Prepaid")
+    plt.ylabel("Pembayaran")
     plt.show()
-    g = []
-    h = []
-    with open("Prepaid.txt", "r") as file:
-        for line in file:
-            data = line.strip().split(",")
-            g.append(data[1])
-            h.append(int(data[2]))
-    plt.plot(g, h)
-    plt.xlabel("Tanggal")
-    plt.ylabel("Nominal")
-    plt.title("Grafik Pembayaran Listrik Postpaid")
-    plt.show()
- 
 
 
 run()
