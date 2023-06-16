@@ -73,4 +73,4 @@ def nominal(prompt):
         else:
             print('Input harus berupa angka bulat dan tidak boleh 0.')
             print('Silakan coba lagi.\n')
-    return int(variable)
+    return float(variable)
