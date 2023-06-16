@@ -49,6 +49,7 @@ def home():
                 raise ValueError
         except ValueError:
             print(f"Maaf, pilihan {pilih} tidak tersedia.")
+            print('Silakan coba lagi\n')
             
 def daftar():
     print('\n========== Daftar Akun ==========')
