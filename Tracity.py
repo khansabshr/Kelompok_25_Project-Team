@@ -149,58 +149,61 @@ def riwayat():
 import datetime
 
 def prepaid():
-    tanggal = datetime.datetime.now()
+    tanggal = datetime.date.today()
     email = email_login
-    pulsa_awal = float(input("Masukkan pulsa awal     : "))
+    pulsa_awal = nominal("Masukkan pulsa awal     : ")
     token_awal = pulsa_awal/2000
     print("Token awal Anda: ", token_awal)
-    pemakaian_listrik = float(input("Masukkan jumlah pemakaian listrik dalam kWh     : "))
-    kwh = 0 #tambahan
+    pemakaian_listrik = nominal("Masukkan jumlah pemakaian listrik dalam kWh     : ")
+    kwh = 0
+    bayar = 0
     if pemakaian_listrik <= token_awal:
         kwh = token_awal - pemakaian_listrik
         print("Sisa token Anda: ", kwh)
         pembayaran = input_yn("Apakah Anda ingin melakukan pembayaran? (Y/N)   : ") 
         if pembayaran == "y":                                                       
             nomor_kartu_kredit = input_kredit("Masukkan nomor kartu kredit : ")    
-            bayar = int(input('Masukkan nominal pembayaran : '))
+            bayar = nominal('Masukkan nominal pembayaran : ')
             token_sekarang = (bayar/2000) + kwh
-            print(fonts("Pembayaran Anda sedang diproses...", color='yellow', style='italic')) #tambahan
+            print(fonts("Pembayaran Anda sedang diproses...", color='yellow', style='italic'))
             print("Pembayaran kartu kredit berhasil.")
             print("Token anda sekarang: ",token_sekarang)                           
             print("Terima kasih telah menggunakan Tracity.")
         else:
+            token_sekarang = kwh
             print("Terima kasih telah menggunakan Tracity.")
     else:
         print("Pulsa anda tidak mencukupi.")
         pembayaran = input_yn("Apakah Anda ingin melakukan pembayaran? (Y/N)   : ") 
         if pembayaran == "y":                                                       
             nomor_kartu_kredit = input_kredit("Masukkan nomor kartu kredit : ")     
-            bayar = int(input('Masukkan nominal pembayaran : '))
+            bayar = nominal('Masukkan nominal pembayaran : ')
             token_sekarang = (bayar/2000) + kwh
-            print(fonts("Pembayaran Anda sedang diproses...", color='yellow', style='italic')) #tambahan
+            print(fonts("Pembayaran Anda sedang diproses...", color='yellow', style='italic'))
             print("Pembayaran kartu kredit berhasil.")
-            print("Token anda sekarang: ",token_sekarang)                           #tambahan
+            print("Token anda sekarang: ",token_sekarang)                           
             print("Terima kasih telah menggunakan Tracity.")
         else:
             print("Terima kasih telah menggunakan Tracity.")
     with open('Prepaid.txt', 'a') as file:
-        file.write(f"{email},{tanggal},nominal pembayaran : Rp{bayar},token Anda sekarang : {token_sekarang}kwh,\n")
+        file.write(f"\n{email},{tanggal},{bayar},{token_sekarang}")
     exit()
         
 def postpaid():
-    tanggal = datetime.datetime.now()
+    tanggal = datetime.date.today()
     email = email_login
-    kwh = float(input("Masukkan jumlah pemakaian listrik dalam kwh     : "))
+    kwh = nominal("Masukkan jumlah pemakaian listrik dalam kwh     : ")
     total = kwh * 2000
     print("Total tagihan Anda sebesar Rp", total)
     pembayaran = input_yn("Apakah Anda ingin melakukan pembayaran? (Y/N)   : ")    
     if pembayaran == "y":                                                          
         nomor_kartu_kredit = input_kredit("Masukkan nomor kartu kredit : ")        
-        bayar = int(input('Masukkan nominal pembayaran : '))
+        bayar = nominal('Masukkan nominal pembayaran : ')
         sisa_tagihan = total - bayar
         print(fonts("Pembayaran Anda sedang diproses...", color='yellow', style='italic')) 
         print("Pembayaran kartu kredit berhasil.")
     else:
+        print("Total tagihan Anda sebesar Rp", total)
         print("Terima kasih telah menggunakan Tracity.")
     if sisa_tagihan <= 0 :
         print("Tagihan Anda sudah terbayar penuh")
@@ -210,7 +213,7 @@ def postpaid():
         pembayaran = input_yn("Apakah Anda ingin melakukan pembayaran? (Y/N)   : ") 
         if pembayaran == "y":                                                       
             nomor_kartu_kredit = input_kredit("Masukkan nomor kartu kredit : ")     
-            bayar = input('Masukkan nominal pembayaran : ')
+            bayar = nominal('Masukkan nominal pembayaran : ')
             sisa_tagihan = total - bayar
             print(fonts("Pembayaran Anda sedang diproses...", color='yellow', style='italic'))  
             print("Pembayaran kartu kredit berhasil.")
@@ -218,10 +221,7 @@ def postpaid():
         else:
             print("Terima kasih telah menggunakan Tracity.")
     with open('Postpaid.txt', 'a') as file:
-        file.write(f"{email},{tanggal},nominal pembayaran : Rp{total},token yang dipakai : {kwh}kwh\n")
-    exit()
-
-
+        file.write(f"\n{email},{tanggal},{total},{kwh}")
 
 def riwayat_pemakaian():
     a = []
