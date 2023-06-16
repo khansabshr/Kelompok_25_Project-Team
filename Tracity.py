@@ -46,7 +46,8 @@ def home():
             elif option == 2:
                 daftar()
             elif option == 3:
-                keluar()
+                print("Terima kasih! Telah menggunakan Tracity")
+                break
             else:
                 raise ValueError
         except ValueError:
@@ -68,10 +69,6 @@ def daftar():
         file.write(f"\n{email_daftar},{pw_daftar}")
     print('Akun berhasil didaftarkan\n') 
     home()
-    
-def keluar():
-    print('Terima kasih telah menggunakan Tracity')
-    exit()
 
 def masuk():
     print('\n========== Masuk  ==========')
