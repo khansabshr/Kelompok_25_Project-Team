@@ -104,10 +104,9 @@ def home2():
         print(f"{fonts('[2]', color='pink')} Riwayat")
         try:
             pilih = input('Silakan pilih    : ')
-            option = int(pilih)
-            if option == 1:
+            if pilih == '1':
                 pembayaran()                                            
-            elif option == 2:
+            elif pilih == '2':
                 riwayat()
             else :
                 raise ValueError
@@ -122,16 +121,15 @@ def pembayaran():
         print(f"{fonts('[2]', color='pink')} Postpaid")
         try:
             pilih = input('Silakan pilih    : ')
-            option = int(pilih)
-            if option == 1:
-                prepaid()
-            elif option == 2:                                       
+            if pilih == '1':
+                prepaid()                                            
+            elif pilih == '2':
                 postpaid()
             else :
                 raise ValueError
         except ValueError:
-                print(f'Maaf, pilihan {pilih} tidak tersedia')
-                print('Silakan coba lagi\n')  
+            print(f"Maaf, pilihan {pilih} tidak tersedia.")
+            print('Silakan coba lagi\n')  
             
 def riwayat():
     while True:
