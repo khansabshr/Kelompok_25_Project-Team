@@ -1,6 +1,5 @@
 yulia@gmail.com,2023-06-13 09:56:25.870498,90000,50000.0,70.0
 aca@outlook.com,2023-06-13 13:35:26.638508,1800000,-1620000.0,90.0
-aca@gmail.com,2023-06-13 14:32:19.823993,nominal pembayaran : Rp180000,token yang dipakai : 90.0kwh
-aca@yahoo.com,2023-06-13 14:35:26.590292,nominal pembayaran : Rp200000.0,token yang dipakai : 100.0kwh
-
+aca@gmail.com,2023-06-13 14:32:19.823993,180000,90.0
+aca@yahoo.com,2023-06-13 14:35:26.590292,200000.0,100.0
 aragita@gmail.com,2023-06-17,272000.0,136.0
