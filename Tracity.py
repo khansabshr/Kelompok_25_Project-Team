@@ -247,9 +247,45 @@ def riwayat_prepaid():
     plt.xlabel("Tanggal")
     plt.ylabel("Pembayaran (dalam rupiah)")
     plt.show()
-    # Mengambil data kedua
+  
     data2 = []
     with open('Prepaid.txt', 'r') as file:
+        for line in file:
+            line_data = line.strip().split(',')
+            data2.append(line_data)
+    tanggal2 = []
+    pemakaian = []
+    for item in data2:
+        tanggal2.append(item[1][5:10])
+        pemakaian.append(float(item[3]))
+    plt.subplot(1, 2, 2)
+    plt.plot(tanggal2, pemakaian)
+    plt.title("Riwayat Pemakaian")
+    plt.xlabel("Tanggal")
+    plt.ylabel("Pemakaian (dalam kwh)")
+    plt.tight_layout()
+    plt.show()
+    
+def riwayat_postpaid():
+    data1 = []
+    with open('Postpaid.txt', 'r') as file:
+        for line in file:
+            line_data = line.strip().split(',')
+            data1.append(line_data)
+    tanggal = []
+    pembayaran = []
+    for item in data1:
+        tanggal.append(item[1][5:10])
+        pembayaran.append(float(item[2]))
+    plt.subplot(1, 2, 1)
+    plt.plot(tanggal, pembayaran)
+    plt.title("Riwayat Pembayaran")
+    plt.xlabel("Tanggal")
+    plt.ylabel("Pembayaran (dalam rupiah)")
+    plt.show()
+  
+    data2 = []
+    with open('Postpaid.txt', 'r') as file:
         for line in file:
             line_data = line.strip().split(',')
             data2.append(line_data)
