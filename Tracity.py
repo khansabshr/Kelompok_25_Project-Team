@@ -76,7 +76,7 @@ def masuk():
     email_login = input_email('Masukkan email yang terdaftar    : ')
     coba = 0
     while coba < 3:
-        password = input("Masukkan password (5 digit)           : ")
+        password = input("Masukkan password (5 digit)      : ")
         with open("Daftar akun.txt", "r") as file:
             for line in file:
                 data = line.strip().split(",")
