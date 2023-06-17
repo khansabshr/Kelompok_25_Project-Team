@@ -156,42 +156,44 @@ def riwayat():
             print('Silakan coba lagi\n')   
 
 def prepaid():
-    tanggal = datetime.date.today()
     email = email_login
-    pulsa_awal = nominal("Masukkan pulsa awal     : ")
+    tanggal = datetime.date.today()
+    pulsa_awal = pulsa("Masukkan pulsa awal     : ")
     token_awal = pulsa_awal/2000
-    print("Token awal Anda: ", token_awal)
-    pemakaian_listrik = nominal("Masukkan jumlah pemakaian listrik dalam kWh     : ")
-    kwh = 0
+    print("Token awal Anda         : ", token_awal)
+    pemakaian_listrik = nominal2("Masukkan jumlah pemakaian listrik dalam kWh     : ")
     bayar = 0
-    if pemakaian_listrik <= token_awal:
-        kwh = token_awal - pemakaian_listrik
-        print("Sisa token Anda: ", kwh)
-        pembayaran = input_yn("Apakah Anda ingin melakukan pembayaran? (Y/N)   : ") 
-        if pembayaran == "y":                                                       
-            nomor_kartu_kredit = input_kredit("Masukkan nomor kartu kredit : ")    
-            bayar = nominal('Masukkan nominal pembayaran : ')
-            token_sekarang = (bayar/2000) + kwh
-            print(fonts("Pembayaran Anda sedang diproses...", color='yellow', style='italic'))
+    sisa_token = 0 
+    while pemakaian_listrik > token_awal:
+        print(f"Pulsa anda tidak mencukupi. Pembelian maksimal untuk {token_awal} kwh\n")
+        time.sleep(1)
+        pemakaian_listrik = nominal2("Masukkan jumlah pemakaian listrik dalam kWh     : ")
+    sisa_token = token_awal - pemakaian_listrik
+    print("Sisa token Anda:", sisa_token)
+    pembayaran = input_yn("Apakah Anda ingin melakukan pembelian token? (Y/N): ")
+    if pembayaran == "y":
+        nomor_kartu_kredit = input_kredit("Masukkan nomor kartu kredit: ")
+        bayar = pulsa('Masukkan nominal pembayaran: ')
+        token_sekarang = (bayar/2000) + sisa_token
+        print(fonts("\nPembayaran Anda sedang diproses...", color='yellow', style='italic'))
+        time.sleep(2)
+        print(f"Pembayaran kartu kredit {fonts('berhasil', color='blue')}")
+        print("Token anda sekarang:", token_sekarang)
+        keluar = input_yn("Apakah Anda ingin kembali ke halaman utama? (Y/N): ")
+        if keluar == 'y':
+            print(fonts("Kembali ke halaman utama...", color='yellow', style='italic'))
             time.sleep(2)
-            print(fonts("Pembayaran kartu kredit berhasil.", color='green'))
-            print("Token anda sekarang: ",token_sekarang)                           
-            print("Terima kasih telah menggunakan Tracity.")
+            home2()
         else:
-            token_sekarang = kwh
             print("Terima kasih telah menggunakan Tracity.")
     else:
-        print("Pulsa anda tidak mencukupi.")
-        pembayaran = input_yn("Apakah Anda ingin melakukan pembayaran? (Y/N)   : ") 
-        if pembayaran == "y":                                                       
-            nomor_kartu_kredit = input_kredit("Masukkan nomor kartu kredit : ")     
-            bayar = nominal('Masukkan nominal pembayaran : ')
-            token_sekarang = (bayar/2000) + kwh
-            print(fonts("Pembayaran Anda sedang diproses...", color='yellow', style='italic'))
+        token_sekarang = sisa_token
+        print('Token anda sekarang:', token_sekarang)
+        keluar = input_yn("Apakah Anda ingin kembali ke halaman utama? (Y/N): ")
+        if keluar == 'y':
+            print(fonts("Kembali ke halaman utama...", color='yellow', style='italic'))
             time.sleep(2)
-            print(fonts("Pembayaran kartu kredit berhasil.", color='green'))
-            print("Token anda sekarang: ",token_sekarang)                           
-            print("Terima kasih telah menggunakan Tracity.")
+            home2()
         else:
             print("Terima kasih telah menggunakan Tracity.")
     with open('Prepaid.txt', 'a') as file:
