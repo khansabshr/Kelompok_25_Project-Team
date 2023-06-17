@@ -15,10 +15,10 @@ def welcome_message():
     print(fonts(text1.center(90)))                                                      
     print(fonts(text2.center(80)))
     print(fonts(garis.center(80)))
-    print('''Tracity atau Track Your Electricity Program ini dirancang untuk membantu
-Anda melacak penggunaan listrik Anda. Dengan program ini, Anda dapat dengan
-mudah memantau konsumsi listrik Anda dan mengidentifikasi area di mana Anda
-dapat menghemat energi''')
+    print('''Tracity atau Track Your Electricity ini telah dirancang khusus untuk 
+membantu Anda melacak penggunaan listrik Anda. Dengan program ini, Anda dapat dengan
+mudah memantau konsumsi listrik Anda dan mengidentifikasi area di mana Anda dapat
+melakukan penghematan energi''')
     print(fonts(garis.center(80)))
     print('''Kami menyediakan berbagai opsi pembayaran untuk kenyamanan Anda dan riwayat
 yang bisa diakses kapan saja!
