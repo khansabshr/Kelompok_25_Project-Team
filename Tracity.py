@@ -103,7 +103,7 @@ def masuk():
     
 def home2():
     while True:
-        print(\n========== Transaksi  ==========')
+        print('\n========== Transaksi  ==========')
         print(f"{fonts('[1]', color='pink')} Pembayaran")
         print(f"{fonts('[2]', color='pink')} Riwayat")
         print(fonts('Tekan enter untuk kembali ke halaman utama', color='yellow', style='italic'))
