@@ -254,7 +254,7 @@ def postpaid():
                 print(fonts("Kembali ke halaman utama...", color='yellow', style='italic'))
                 time.sleep(2)
                 os.system('cls')
-                home()
+                home2()
         else:
             print("Sisa tagihan Anda sebesar Rp", sisa_tagihan)
             ask = input(fonts('Tekan enter untuk kembali ke halaman utama', color='yellow', style='italic'))
