@@ -1,5 +1,5 @@
 import Modul
-from Modul import input_email, password, input_yn, fonts, input_kredit, nominal
+from Modul import input_email, password, input_yn, fonts, input_kredit, nominal, pulsa
 import matplotlib.pyplot as plt
 import time
 import datetime
