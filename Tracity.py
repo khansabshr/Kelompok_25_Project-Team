@@ -219,49 +219,58 @@ def prepaid():
 sisa_tagihan = 0
 
 def postpaid():
-    tanggal = datetime.date.today()
     email = email_login
-    kwh = nominal("Masukkan jumlah pemakaian listrik dalam kwh     : ")
-    if kwh == 0:
-        total = 0
-    else:
-        total = kwh * 2000
-        print("Total tagihan Anda sebesar Rp", total)
+    global sisa_tagihan
+    tanggal = datetime.date.today()
+    tagihan = sisa_tagihan
+    if tagihan > 0:
+        print('=' * 30)
+        print('Tagihan Anda Rp', tagihan)
+        print('=' * 30)
+    kwh = nominal("\nMasukkan jumlah pemakaian listrik dalam kwh     : ")
+    total = kwh * 2000
+    if tagihan > 0:
+        total += tagihan
+    bayar = 0
+    print('Sisa tagihan sebelumnya    Rp', sisa_tagihan)
+    print(fonts(f"Total tagihan Anda         Rp {total}", style='underline'))
     pembayaran = input_yn("Apakah Anda ingin melakukan pembayaran? (Y/N)   : ")    
     if pembayaran == "y":                                                          
         nomor_kartu_kredit = input_kredit("Masukkan nomor kartu kredit : ")        
-        bayar = 0
-        while bayar <= 0 or bayar > total:
-            bayar = nominal('Masukkan nominal pembayaran : ')
-            if bayar > total:
-                print(f"Nominal pembayaran maksimal Rp {total}. Silakan coba lagi.")
+        minimal = total*(15/100)
+        bayar = nominal2('Masukkan nominal pembayaran : ')
+        while bayar < minimal or bayar > total:
+            print(f"Input tidak valid! Nominal minimal Rp{minimal} maksimal Rp{total}\n")
+            time.sleep(1)
+            bayar = nominal2('Masukkan nominal pembayaran : ')
         sisa_tagihan = total - bayar
-        print(fonts("Pembayaran Anda sedang diproses...", color='yellow', style='italic'))
+        print(fonts("\nPembayaran Anda sedang diproses...", color='yellow', style='italic'))
         time.sleep(2)
-        print(fonts("Pembayaran kartu kredit berhasil.", color='green'))
-    else:
-        print("Total tagihan Anda sebesar Rp", total)
-        print("Terima kasih telah menggunakan Tracity.")
-    if total == 0 or sisa_tagihan <= 0 :
-        print("Tagihan Anda sudah terbayar penuh")
-        print("Terima kasih telah menggunakan Tracity.")
-    else:
-        print("Sisa tagihan Anda sebesar Rp", sisa_tagihan)
-        pembayaran = input_yn("Apakah Anda ingin melakukan pembayaran? (Y/N)   : ") 
-        if pembayaran == "y":                                                       
-            nomor_kartu_kredit = input_kredit("Masukkan nomor kartu kredit : ")
-            bayar = 0
-            while bayar <= 0 or bayar > sisa_tagihan:
-                bayar = nominal('Masukkan nominal pembayaran : ')
-                if bayar > sisa_tagihan:
-                    print("Nominal pembayaran tidak valid. Silakan coba lagi.")    
-            sisa_tagihan = sisa_tagihan - bayar
-            print(fonts("Pembayaran Anda sedang diproses...", color='yellow', style='italic'))
-            time.sleep(2)
-            print(fonts("Pembayaran kartu kredit berhasil.", color='green'))
-            print("Terima kasih telah menggunakan Tracity.")
+        print(f"Pembayaran kartu kredit {fonts('berhasil', color='blue')}")
+        if sisa_tagihan <= 0 :
+            print("Tagihan Anda sudah terbayar penuh")
+            ask = input(fonts('Tekan enter untuk kembali ke halaman utama', color='yellow', style='italic'))
+            if ask == '':
+                print(fonts("Kembali ke halaman utama...", color='yellow', style='italic'))
+                time.sleep(2)
+                os.system('cls')
+                home()
         else:
-            print("Terima kasih telah menggunakan Tracity.")
+            print("Sisa tagihan Anda sebesar Rp", sisa_tagihan)
+            ask = input(fonts('Tekan enter untuk kembali ke halaman utama', color='yellow', style='italic'))
+            if ask == '':
+                print(fonts("Kembali ke halaman utama...", color='yellow', style='italic'))
+                time.sleep(2)
+                os.system('cls')
+                home2()
+    else:
+        print("Sisa tagihan Anda sebesar Rp", total)
+        ask = input(fonts('Tekan enter untuk kembali ke halaman utama', color='yellow', style='italic'))
+        if ask == '':
+            print(fonts("Kembali ke halaman utama...", color='yellow', style='italic'))
+            time.sleep(2)
+            os.system('cls')
+            home2()
     with open('Postpaid.txt', 'a') as file:
         file.write(f"\n{email},{tanggal},{total},{kwh}")
 
