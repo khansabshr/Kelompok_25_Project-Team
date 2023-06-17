@@ -161,13 +161,13 @@ def prepaid():
     pulsa_awal = pulsa("Masukkan pulsa awal     : ")
     token_awal = pulsa_awal/2000
     print("Token awal Anda         : ", token_awal)
-    pemakaian_listrik = nominal2("Masukkan jumlah pemakaian listrik dalam kWh     : ")
+    pemakaian_listrik = nominal("Masukkan jumlah pemakaian listrik dalam kWh     : ")
     bayar = 0
     sisa_token = 0 
     while pemakaian_listrik > token_awal:
         print(f"Pulsa anda tidak mencukupi. Pembelian maksimal untuk {token_awal} kwh\n")
         time.sleep(1)
-        pemakaian_listrik = nominal2("Masukkan jumlah pemakaian listrik dalam kWh     : ")
+        pemakaian_listrik = nominal("Masukkan jumlah pemakaian listrik dalam kWh     : ")
     sisa_token = token_awal - pemakaian_listrik
     print("Sisa token Anda:", sisa_token)
     pembayaran = input_yn("Apakah Anda ingin melakukan pembelian token? (Y/N): ")
