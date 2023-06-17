@@ -76,38 +76,34 @@ def masuk():
     print('Silakan Masukkan Akun Anda yang Sudah Terdaftar')
     global email_login
     email_login = input_email('Masukkan email yang terdaftar    : ')
-    coba = 0
-    while coba < 3:
-        with open("Daftar akun.txt", "r") as file:
-            email_terdaftar = False
-            for line in file:
-                data = line.strip().split(",")
-                if len(data) == 2 and data[0] == email_login:
-                    email_terdaftar = True
-                    break
-            if email_terdaftar:
-                password = input("Masukkan password (5 digit)      : ")
-                with open("Daftar akun.txt", "r") as file:
-                    for line in file:
-                        data = line.strip().split(",")
-                        if len(data) == 2 and data[0] == email_login and data[1] == password:
-                            print("Login berhasil!")
-                            time.sleep(2)
-                            home2()
-                            break
-                    else:
-                        print("Password salah. Silakan coba lagi.")
-            else:
-                print("Email tidak terdaftar. Silakan coba lagi.")
-                email_login = input_email('Masukkan email yang terdaftar    : ')
-        coba += 1
-    if coba == 3:
-        print("Gagal login. Terlalu banyak percobaan.\n")
-        home()
+    with open("Daftar akun.txt", "r") as file:
+        email_terdaftar = False
+        for line in file:
+            data = line.strip().split(",")
+            if len(data) == 2 and data[0] == email_login:
+                email_terdaftar = True
+                break
+    if email_terdaftar:
+        coba = 0
+        while coba < 3:
+            password = input("Masukkan password (5 digit)      : ")
+            with open("Daftar akun.txt", "r") as file:
+                for line in file:
+                    data = line.strip().split(",")
+                    if len(data) == 2 and data[0] == email_login and data[1] == password:
+                        print("Login berhasil!")
+                        time.sleep(2)
+                        home2()
+            coba += 1
+            print("Password salah. Silakan coba lagi.")
+        print("\nGagal login. Terlalu banyak percobaan.")
+    else:
+        print("Email belum terdaftar.\n")
+    home()
     
 def home2():
     while True:
-        print()
+        print(\n========== Transaksi  ==========')
         print(f"{fonts('[1]', color='pink')} Pembayaran")
         print(f"{fonts('[2]', color='pink')} Riwayat")
         print(fonts('Tekan enter untuk kembali ke halaman utama', color='yellow', style='italic'))
@@ -287,7 +283,7 @@ def riwayat_prepaid():
             pembayaran.append(float(item[2]))
     plt.subplot(1, 2, 1)
     plt.plot(tanggal, pembayaran)
-    plt.title("Riwayat Pembayaran (postpaid)")
+    plt.title("Riwayat Pembayaran (prepaid)")
     plt.xlabel("Tanggal")
     plt.ylabel("Pembayaran (dalam rupiah)")
     plt.show()
