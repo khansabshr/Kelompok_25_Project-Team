@@ -2,6 +2,7 @@ import Modul
 from Modul import input_email, password, input_yn, fonts, input_kredit, nominal, pulsa
 import matplotlib.pyplot as plt
 import time
+import os
 import datetime
 
 def welcome_message():
@@ -47,7 +48,7 @@ def home():
                 daftar()
             elif option == 3:
                 print("Terima kasih telah menggunakan Tracity!")
-                break
+                exit()
             else:
                 raise ValueError
         except ValueError:
@@ -109,12 +110,17 @@ def home2():
         print()
         print(f"{fonts('[1]', color='pink')} Pembayaran")
         print(f"{fonts('[2]', color='pink')} Riwayat")
+        print(fonts('Tekan enter untuk kembali ke halaman utama', color='yellow', style='italic'))
         try:
             pilih = input('Silakan pilih    : ')
             if pilih == '1':
                 pembayaran()                                            
             elif pilih == '2':
                 riwayat()
+            elif pilih == '':
+                os.system('cls')
+                time.sleep(2)
+                home()
             else :
                 raise ValueError
         except ValueError:
@@ -126,12 +132,17 @@ def pembayaran():
         print('\n==========   Pembayaran   ==========')
         print(f"{fonts('[1]', color='pink')} Prepaid")
         print(f"{fonts('[2]', color='pink')} Postpaid")
+        print(fonts('Tekan enter untuk kembali ke page sebelumnya', color='yellow', style='italic'))
         try:
             pilih = input('Silakan pilih    : ')
             if pilih == '1':
                 prepaid()                                            
             elif pilih == '2':
                 postpaid()
+            elif pilih == '':
+                os.system('cls')
+                time.sleep(2)
+                home2()
             else :
                 raise ValueError
         except ValueError:
@@ -143,12 +154,17 @@ def riwayat():
         print('\n========== Riwayat ==========')
         print(f"{fonts('[1]', color='pink')} Riwayat Prepaid")
         print(f"{fonts('[2]', color='pink')} Riwayat Postpaid")
+        print(fonts('Tekan enter untuk kembali ke halaman sebelumnya', color='yellow', style='italic'))
         try:
             pilih = input('Silakan pilih    : ')
             if pilih == '1':
                 riwayat_prepaid()                                            
             elif pilih == '2':
                 riwayat_postpaid()
+            elif pilih == '':
+                os.system('cls')
+                time.sleep(2)
+                home2()
             else :
                 raise ValueError
         except ValueError:
@@ -199,18 +215,18 @@ def prepaid():
     with open('Prepaid.txt', 'a') as file:
         file.write(f"\n{email},{tanggal},{bayar},{token_sekarang}")
     exit()
-        
+
+sisa_tagihan = 0
+
 def postpaid():
     tanggal = datetime.date.today()
     email = email_login
     kwh = nominal("Masukkan jumlah pemakaian listrik dalam kwh     : ")
-
     if kwh == 0:
         total = 0
     else:
         total = kwh * 2000
         print("Total tagihan Anda sebesar Rp", total)
-
     pembayaran = input_yn("Apakah Anda ingin melakukan pembayaran? (Y/N)   : ")    
     if pembayaran == "y":                                                          
         nomor_kartu_kredit = input_kredit("Masukkan nomor kartu kredit : ")        
@@ -219,7 +235,6 @@ def postpaid():
             bayar = nominal('Masukkan nominal pembayaran : ')
             if bayar > total:
                 print(f"Nominal pembayaran maksimal Rp {total}. Silakan coba lagi.")
-        
         sisa_tagihan = total - bayar
         print(fonts("Pembayaran Anda sedang diproses...", color='yellow', style='italic'))
         time.sleep(2)
@@ -227,7 +242,6 @@ def postpaid():
     else:
         print("Total tagihan Anda sebesar Rp", total)
         print("Terima kasih telah menggunakan Tracity.")
-    
     if total == 0 or sisa_tagihan <= 0 :
         print("Tagihan Anda sudah terbayar penuh")
         print("Terima kasih telah menggunakan Tracity.")
@@ -240,8 +254,7 @@ def postpaid():
             while bayar <= 0 or bayar > sisa_tagihan:
                 bayar = nominal('Masukkan nominal pembayaran : ')
                 if bayar > sisa_tagihan:
-                    print("Nominal pembayaran tidak valid. Silakan coba lagi.")
-                    
+                    print("Nominal pembayaran tidak valid. Silakan coba lagi.")    
             sisa_tagihan = sisa_tagihan - bayar
             print(fonts("Pembayaran Anda sedang diproses...", color='yellow', style='italic'))
             time.sleep(2)
@@ -249,7 +262,6 @@ def postpaid():
             print("Terima kasih telah menggunakan Tracity.")
         else:
             print("Terima kasih telah menggunakan Tracity.")
-    
     with open('Postpaid.txt', 'a') as file:
         file.write(f"\n{email},{tanggal},{total},{kwh}")
 
