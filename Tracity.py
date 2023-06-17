@@ -185,7 +185,7 @@ def prepaid():
         time.sleep(1)
         pemakaian_listrik = nominal("Masukkan jumlah pemakaian listrik dalam kWh     : ")
     sisa_token = token_awal - pemakaian_listrik
-    print("Sisa token Anda:", sisa_token)
+    print("Sisa token Anda     :", sisa_token)
     pembayaran = input_yn("Apakah Anda ingin melakukan pembelian token? (Y/N): ")
     if pembayaran == "y":
         nomor_kartu_kredit = input_kredit("Masukkan nomor kartu kredit: ")
@@ -194,24 +194,22 @@ def prepaid():
         print(fonts("\nPembayaran Anda sedang diproses...", color='yellow', style='italic'))
         time.sleep(2)
         print(f"Pembayaran kartu kredit {fonts('berhasil', color='blue')}")
-        print("Token anda sekarang:", token_sekarang)
-        keluar = input_yn("Apakah Anda ingin kembali ke halaman utama? (Y/N): ")
-        if keluar == 'y':
+        print("Token anda sekarang :", token_sekarang)
+        ask = input(fonts('Tekan enter untuk kembali ke halaman utama', color='yellow', style='italic'))
+        if ask == '':
             print(fonts("Kembali ke halaman utama...", color='yellow', style='italic'))
             time.sleep(2)
+            os.system('cls')
             home2()
-        else:
-            print("Terima kasih telah menggunakan Tracity.")
     else:
         token_sekarang = sisa_token
-        print('Token anda sekarang:', token_sekarang)
-        keluar = input_yn("Apakah Anda ingin kembali ke halaman utama? (Y/N): ")
-        if keluar == 'y':
+        print('Token anda sekarang :', token_sekarang)
+        ask = input(fonts('Tekan enter untuk kembali ke halaman utama', color='yellow', style='italic'))
+        if ask == '':
             print(fonts("Kembali ke halaman utama...", color='yellow', style='italic'))
             time.sleep(2)
+            os.system('cls')
             home2()
-        else:
-            print("Terima kasih telah menggunakan Tracity.")
     with open('Prepaid.txt', 'a') as file:
         file.write(f"\n{email},{tanggal},{bayar},{token_sekarang}")
     exit()
