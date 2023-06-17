@@ -65,12 +65,23 @@ def input_kredit(prompt):
             print(f"Error: {str(e)}")
 
 def nominal(prompt):
-    valid_input = False
-    while not valid_input:
-        variable = input(prompt)
-        if variable.isdigit() and int(variable) != 0:
-            valid_input = True
-        else:
-            print('Input harus berupa angka bulat dan tidak boleh 0.')
-            print('Silakan coba lagi.\n')
-    return float(variable)
+    while True:
+        try:
+            variable = float(input(prompt))
+            if variable != 0:
+                return variable
+            else:
+                print('Input tidak boleh 0.')
+        except ValueError:
+            print('Input harus berupa angka.')
+
+def pulsa(prompt):
+    while True:
+        try:
+            variable = float(input(prompt))
+            if variable >= 50000:
+                return variable
+            else:
+                print('Nominal minimal Rp50.000\n')
+        except ValueError:
+            print('Input harus berupa angka.\n')
