@@ -238,11 +238,11 @@ def postpaid():
     if pembayaran == "y":                                                          
         nomor_kartu_kredit = input_kredit("Masukkan nomor kartu kredit : ")        
         minimal = total*(15/100)
-        bayar = nominal2('Masukkan nominal pembayaran : ')
+        bayar = nominal('Masukkan nominal pembayaran : ')
         while bayar < minimal or bayar > total:
             print(f"Input tidak valid! Nominal minimal Rp{minimal} maksimal Rp{total}\n")
             time.sleep(1)
-            bayar = nominal2('Masukkan nominal pembayaran : ')
+            bayar = nominal('Masukkan nominal pembayaran : ')
         sisa_tagihan = total - bayar
         print(fonts("\nPembayaran Anda sedang diproses...", color='yellow', style='italic'))
         time.sleep(2)
