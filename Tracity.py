@@ -266,6 +266,7 @@ def postpaid():
         file.write(f"\n{email},{tanggal},{total},{kwh}")
 
 def riwayat_prepaid():
+    email = email_login
     data1 = []
     with open('Prepaid.txt', 'r') as file:
         for line in file:
@@ -274,8 +275,9 @@ def riwayat_prepaid():
     tanggal = []
     pembayaran = []
     for item in data1:
-        tanggal.append(item[1][5:10])
-        pembayaran.append(float(item[2]))
+        if item[0] == email:
+            tanggal.append(item[1][5:10])
+            pembayaran.append(float(item[2]))
     plt.subplot(1, 2, 1)
     plt.plot(tanggal, pembayaran)
     plt.title("Riwayat Pembayaran")
@@ -291,8 +293,9 @@ def riwayat_prepaid():
     tanggal2 = []
     pemakaian = []
     for item in data2:
-        tanggal2.append(item[1][5:10])
-        pemakaian.append(float(item[3]))
+        if item[0] == email:
+            tanggal2.append(item[1][5:10])
+            pemakaian.append(float(item[3]))
     plt.subplot(1, 2, 2)
     plt.plot(tanggal2, pemakaian)
     plt.title("Riwayat Pemakaian")
@@ -302,6 +305,7 @@ def riwayat_prepaid():
     plt.show()
     
 def riwayat_postpaid():
+    email = email_login
     data1 = []
     with open('Postpaid.txt', 'r') as file:
         for line in file:
@@ -310,8 +314,9 @@ def riwayat_postpaid():
     tanggal = []
     pembayaran = []
     for item in data1:
-        tanggal.append(item[1][5:10])
-        pembayaran.append(float(item[2]))
+        if item[0] == email:
+            tanggal.append(item[1][5:10])
+            pembayaran.append(float(item[2]))
     plt.subplot(1, 2, 1)
     plt.plot(tanggal, pembayaran)
     plt.title("Riwayat Pembayaran")
@@ -327,8 +332,9 @@ def riwayat_postpaid():
     tanggal2 = []
     pemakaian = []
     for item in data2:
-        tanggal2.append(item[1][5:10])
-        pemakaian.append(float(item[3]))
+        if item[0] == email:
+            tanggal2.append(item[1][5:10])
+            pemakaian.append(float(item[3]))
     plt.subplot(1, 2, 2)
     plt.plot(tanggal2, pemakaian)
     plt.title("Riwayat Pemakaian")
