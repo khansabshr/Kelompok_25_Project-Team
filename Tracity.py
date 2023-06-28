@@ -41,12 +41,12 @@ def home():
         print(fonts('Tekan enter untuk keluar dari program', color='yellow', style='italic'))
         try:
             pilih = input('Silakan pilih    : ')
-            if pilih == 1:
+            if pilih == '1':
                 masuk()
                 break
-            elif pilih == 2:
+            elif pilih == '2':
                 daftar()
-            elif pilih == 3:
+            elif pilih == '3':
                 logout()
             elif pilih == '':
                 os.system('cls')
@@ -163,7 +163,7 @@ def pembayaran():
             
 def riwayat():
     while True:
-        print('\n========== Riwayat ==========')
+        print('\n=================  Riwayat  ================')
         print(f"{fonts('[1]', color='pink')} Riwayat Prepaid")
         print(f"{fonts('[2]', color='pink')} Riwayat Postpaid")
         print(fonts('Tekan enter untuk kembali ke halaman sebelumnya', color='yellow', style='italic'))
