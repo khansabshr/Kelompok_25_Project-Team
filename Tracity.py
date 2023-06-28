@@ -1,8 +1,8 @@
-import Modul
-from Modul import input_email, password, input_yn, fonts, input_kredit, nominal, pulsa
+from Modul import input_email, password, input_yn, fonts, input_kredit, nominal, pulsa, kuitansi_prepaid, kuitansi_postpaid, transaksi_postpaid, transaksi_prepaid
 import matplotlib.pyplot as plt
 import time
 import os
+import sys
 import datetime
 
 def welcome_message():
@@ -15,10 +15,10 @@ def welcome_message():
     print(fonts(text1.center(90)))                                                      
     print(fonts(text2.center(80)))
     print(fonts(garis.center(80)))
-    print('''Tracity atau Track Your Electricity ini telah dirancang khusus untuk 
-membantu Anda melacak penggunaan listrik Anda. Dengan program ini, Anda dapat dengan
-mudah memantau konsumsi listrik Anda dan mengidentifikasi area di mana Anda dapat
-melakukan penghematan energi''')
+    print('''Tracity atau Track Your Electricity ini telah dirancang khusus untuk membantu
+Anda melacak penggunaan listrik Anda. Dengan program ini, Anda dapat dengan
+mudah memantau konsumsi listrik Anda dan mengidentifikasi area di mana Anda
+dapat melakukan penghematan energi''')
     print(fonts(garis.center(80)))
     print('''Kami menyediakan berbagai opsi pembayaran untuk kenyamanan Anda dan riwayat
 yang bisa diakses kapan saja!
@@ -47,8 +47,7 @@ def home():
             elif option == 2:
                 daftar()
             elif option == 3:
-                print("Terima kasih telah menggunakan Tracity!")
-                exit()
+                logout()
             else:
                 raise ValueError
         except ValueError:
@@ -100,7 +99,20 @@ def masuk():
     else:
         print("Email belum terdaftar.\n")
     home()
-    
+
+email_login = None                                      
+
+def logout():
+    global email_login
+    if email_login is None:
+        print("Anda belum login.\n")
+    else:
+        email_login = None
+        print('Anda berhasil logout.\n')                
+        time.sleep(2)
+        os.system('cls')
+        home()
+
 def home2():
     while True:
         print('\n========== Transaksi  ==========')
@@ -281,12 +293,6 @@ def riwayat_prepaid():
         if item[0] == email:
             tanggal.append(item[1][5:10])
             pembayaran.append(float(item[2]))
-    plt.subplot(1, 2, 1)
-    plt.plot(tanggal, pembayaran)
-    plt.title("Riwayat Pembayaran (prepaid)")
-    plt.xlabel("Tanggal")
-    plt.ylabel("Pembayaran (dalam rupiah)")
-    plt.show()
   
     data2 = []
     with open('Prepaid.txt', 'r') as file:
@@ -299,12 +305,18 @@ def riwayat_prepaid():
         if item[0] == email:
             tanggal2.append(item[1][5:10])
             pemakaian.append(float(item[3]))
-    plt.subplot(1, 2, 2)
-    plt.plot(tanggal2, pemakaian)
-    plt.title("Riwayat Pemakaian (prepaid)")
-    plt.xlabel("Tanggal")
-    plt.ylabel("Pemakaian (dalam kwh)")
-    plt.tight_layout()
+    #Grafik pertama
+    fig, (ax1, ax2) = plt.subplots(1, 2)
+    ax1.plot(tanggal, pembayaran)
+    ax1.set_title('Riwayat Pembayaran (prepaid)')
+    ax1.set_xlabel('Tanggal')
+    ax1.set_ylabel('Pembayaran (dalam rupiah)')
+
+    # Grafik kedua
+    ax2.plot(tanggal2, pemakaian)
+    ax2.set_title('Riwayat Pemakaian (prepaid)')
+    ax2.set_xlabel('Tanggal')
+    ax2.set_ylabel('Pemakaian (dalam kwh)')
     plt.show()
     
 def riwayat_postpaid():
@@ -320,12 +332,6 @@ def riwayat_postpaid():
         if item[0] == email:
             tanggal.append(item[1][5:10])
             pembayaran.append(float(item[2]))
-    plt.subplot(1, 2, 1)
-    plt.plot(tanggal, pembayaran)
-    plt.title("Riwayat Pembayaran (postpaid)")
-    plt.xlabel("Tanggal")
-    plt.ylabel("Pembayaran (dalam rupiah)")
-    plt.show()
   
     data2 = []
     with open('Postpaid.txt', 'r') as file:
@@ -338,12 +344,18 @@ def riwayat_postpaid():
         if item[0] == email:
             tanggal2.append(item[1][5:10])
             pemakaian.append(float(item[3]))
-    plt.subplot(1, 2, 2)
-    plt.plot(tanggal2, pemakaian)
-    plt.title("Riwayat Pemakaian (postpaid)")
-    plt.xlabel("Tanggal")
-    plt.ylabel("Pemakaian (dalam kwh)")
-    plt.tight_layout()
+    #Grafik pertama
+    fig, (ax1, ax2) = plt.subplots(1, 2)
+    ax1.plot(tanggal, pembayaran)
+    ax1.set_title('Riwayat Pembayaran (prepaid)')
+    ax1.set_xlabel('Tanggal')
+    ax1.set_ylabel('Pembayaran (dalam rupiah)')
+
+    # Grafik kedua
+    ax2.plot(tanggal2, pemakaian)
+    ax2.set_title('Riwayat Pemakaian (prepaid)')
+    ax2.set_xlabel('Tanggal')
+    ax2.set_ylabel('Pemakaian (dalam kwh)')
     plt.show()
 
 
