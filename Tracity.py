@@ -363,14 +363,14 @@ def riwayat_postpaid():
     #Grafik pertama
     fig, (ax1, ax2) = plt.subplots(1, 2)
     ax1.plot(tanggal, pembayaran)
-    ax1.set_title('Riwayat Pembayaran (prepaid)')
+    ax1.set_title('Riwayat Pembayaran (postpaid)')
     ax1.set_xlabel('Tanggal')
     ax1.set_xticklabels(tanggal, rotation='vertical')
     ax1.set_ylabel('Pembayaran (dalam rupiah)')
 
     # Grafik kedua
     ax2.plot(tanggal2, pemakaian)
-    ax2.set_title('Riwayat Pemakaian (prepaid)')
+    ax2.set_title('Riwayat Pemakaian (postpaid)')
     ax2.set_xlabel('Tanggal')
     ax2.set_xticklabels(tanggal, rotation='vertical')
     ax2.set_ylabel('Pemakaian (dalam kwh)')
