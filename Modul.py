@@ -85,3 +85,27 @@ def pulsa(prompt):
                 print('Nominal minimal Rp50.000\n')
         except ValueError:
             print('Input harus berupa angka.\n')
+
+def kuitansi_prepaid(email, tanggal, bayar, token_sekarang):
+    print("\n========== Kuitansi Pembelian Token Listrik ==========")
+    print("Tanggal Pembelian     :", tanggal)
+    print("Email Pembeli         :", email)
+    print("Nominal Pembayaran    :", bayar)
+    print("Token Sekarang        :", token_sekarang)
+    print("======================================================")
+    
+def kuitansi_postpaid(email, tanggal, total, kwh):
+    print("\n========== Kuitansi Pembayaran Tagihan Listrik ==========")
+    print("Tanggal Pembayaran    :", tanggal)
+    print("Email Pembeli         :", email)
+    print("Total Tagihan         :", total)
+    print("Jumlah Pemakaian (kWh):", kwh)
+    print("=========================================================")
+
+def transaksi_prepaid(email, tanggal, bayar, token_sekarang):
+    with open("Prepaid.txt", "a") as file:
+        file.write(f"\n{email},{tanggal},{bayar},{token_sekarang}")
+
+def transaksi_postpaid(email, tanggal, total, kwh):
+    with open("Postpaid.txt", "a") as file:
+        file.write(f"\n{email},{tanggal},{total},{kwh}")
