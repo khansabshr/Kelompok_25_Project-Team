@@ -35,19 +35,23 @@ def run():
 
 def home():
     while True:
-        print(f"{fonts('[1]', color='pink')} Masuk")
-        print(f"{fonts('[2]', color='pink')} Daftar")
-        print(f"{fonts('[3]', color='pink')} Keluar")  
+        print(f"{fonts('[1]', color='pink')} Masuk  (login)")
+        print(f"{fonts('[2]', color='pink')} Daftar (sign up)")
+        print(f"{fonts('[3]', color='pink')} Keluar (logout)")  
+        print(fonts('Tekan enter untuk keluar dari program', color='yellow', style='italic'))
         try:
             pilih = input('Silakan pilih    : ')
-            option = int(pilih)
-            if option == 1:
+            if pilih == 1:
                 masuk()
                 break
-            elif option == 2:
+            elif pilih == 2:
                 daftar()
-            elif option == 3:
+            elif pilih == 3:
                 logout()
+            elif pilih == '':
+                os.system('cls')
+                print('Terimakasih telah menggunakan Tracity!')
+                exit()
             else:
                 raise ValueError
         except ValueError:
@@ -55,7 +59,7 @@ def home():
             print('Silakan coba lagi\n')
             
 def daftar():
-    print('\n========== Daftar Akun ==========')
+    print('\n===============  Daftar Akun ===============')
     print('Isi data-data berikut dengan benar')
     email_daftar = input_email('Masukkan email                        : ')
     with open("Daftar akun.txt","r") as file:
@@ -71,7 +75,7 @@ def daftar():
     home()
 
 def masuk():
-    print('\n========== Masuk  ==========')
+    print('\n==================  Masuk ==================')
     print('Silakan Masukkan Akun Anda yang Sudah Terdaftar')
     global email_login
     email_login = input_email('Masukkan email yang terdaftar    : ')
@@ -115,7 +119,7 @@ def logout():
 
 def home2():
     while True:
-        print('\n========== Transaksi  ==========')
+        print('\n================  Transaksi  ===============')
         print(f"{fonts('[1]', color='pink')} Pembayaran")
         print(f"{fonts('[2]', color='pink')} Riwayat")
         print(fonts('Tekan enter untuk kembali ke halaman utama', color='yellow', style='italic'))
@@ -137,7 +141,7 @@ def home2():
 
 def pembayaran():
     while True:
-        print('\n==========   Pembayaran   ==========')
+        print('\n==============   Pembayaran   ==============')
         print(f"{fonts('[1]', color='pink')} Prepaid")
         print(f"{fonts('[2]', color='pink')} Postpaid")
         print(fonts('Tekan enter untuk kembali ke page sebelumnya', color='yellow', style='italic'))
@@ -202,7 +206,6 @@ def prepaid():
         print(fonts("\nPembayaran Anda sedang diproses...", color='yellow', style='italic'))
         time.sleep(2)
         print(f"Pembayaran kartu kredit {fonts('berhasil', color='blue')}")
-        print("Token anda sekarang :", token_sekarang)
         kuitansi_prepaid(email, tanggal, bayar, token_sekarang)
         transaksi_prepaid(email, tanggal, bayar, token_sekarang)
         ask = input(fonts('Tekan enter untuk kembali ke halaman utama', color='yellow', style='italic'))
@@ -213,7 +216,6 @@ def prepaid():
             home2()
     else:
         token_sekarang = sisa_token
-        print('Token anda sekarang :', token_sekarang)
         kuitansi_prepaid(email, tanggal, bayar, token_sekarang)
         transaksi_prepaid(email, tanggal, bayar, token_sekarang)
         ask = input(fonts('Tekan enter untuk kembali ke halaman utama', color='yellow', style='italic'))
@@ -250,14 +252,16 @@ def postpaid():
             print(f"Input tidak valid! Nominal minimal Rp{minimal} maksimal Rp{total}\n")
             time.sleep(1)
             bayar = nominal('Masukkan nominal pembayaran : ')
-        sisa_tagihan = total - bayar
+        if bayar == 0:
+            sisa_tagihan = total
+        else:
+            sisa_tagihan = total - bayar
         print(fonts("\nPembayaran Anda sedang diproses...", color='yellow', style='italic'))
         time.sleep(2)
         print(f"Pembayaran kartu kredit {fonts('berhasil', color='blue')}")
-        transaksi_postpaid(email, tanggal, total, kwh)
         if sisa_tagihan <= 0 :
             print("Tagihan Anda sudah terbayar penuh")
-            kuitansi_postpaid(email, tanggal, total, kwh)
+            kuitansi_postpaid(email, tanggal, total, bayar, sisa_tagihan, kwh)
             transaksi_postpaid(email, tanggal, total, kwh)
             ask = input(fonts('Tekan enter untuk kembali ke halaman utama', color='yellow', style='italic'))
             if ask == '':
@@ -267,7 +271,7 @@ def postpaid():
                 home2()
         else:
             print("Sisa tagihan Anda sebesar Rp", sisa_tagihan)
-            kuitansi_postpaid(email, tanggal, total, kwh)
+            kuitansi_postpaid(email, tanggal, total, bayar, sisa_tagihan, kwh)
             transaksi_postpaid(email, tanggal, total, kwh)
             ask = input(fonts('Tekan enter untuk kembali ke halaman utama', color='yellow', style='italic'))
             if ask == '':
@@ -276,8 +280,12 @@ def postpaid():
                 os.system('cls')
                 home2()
     else:
+        if bayar == 0:
+            sisa_tagihan = total
+        else:
+            sisa_tagihan = total - bayar
         print("Sisa tagihan Anda sebesar Rp", total)
-        kuitansi_postpaid(email, tanggal, total, kwh)
+        kuitansi_postpaid(email, tanggal, total, bayar, sisa_tagihan, kwh)
         transaksi_postpaid(email, tanggal, total, kwh)
         ask = input(fonts('Tekan enter untuk kembali ke halaman utama', color='yellow', style='italic'))
         if ask == '':
@@ -316,12 +324,14 @@ def riwayat_prepaid():
     ax1.plot(tanggal, pembayaran)
     ax1.set_title('Riwayat Pembayaran (prepaid)')
     ax1.set_xlabel('Tanggal')
+    ax1.set_xticklabels(tanggal, rotation='vertical')
     ax1.set_ylabel('Pembayaran (dalam rupiah)')
 
     # Grafik kedua
     ax2.plot(tanggal2, pemakaian)
     ax2.set_title('Riwayat Pemakaian (prepaid)')
     ax2.set_xlabel('Tanggal')
+    ax2.set_xticklabels(tanggal, rotation='vertical')
     ax2.set_ylabel('Pemakaian (dalam kwh)')
     plt.show()
     
@@ -355,12 +365,14 @@ def riwayat_postpaid():
     ax1.plot(tanggal, pembayaran)
     ax1.set_title('Riwayat Pembayaran (prepaid)')
     ax1.set_xlabel('Tanggal')
+    ax1.set_xticklabels(tanggal, rotation='vertical')
     ax1.set_ylabel('Pembayaran (dalam rupiah)')
 
     # Grafik kedua
     ax2.plot(tanggal2, pemakaian)
     ax2.set_title('Riwayat Pemakaian (prepaid)')
     ax2.set_xlabel('Tanggal')
+    ax2.set_xticklabels(tanggal, rotation='vertical')
     ax2.set_ylabel('Pemakaian (dalam kwh)')
     plt.show()
 
