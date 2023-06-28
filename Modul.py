@@ -94,11 +94,13 @@ def kuitansi_prepaid(email, tanggal, bayar, token_sekarang):
     print("Token Sekarang        :", token_sekarang)
     print("======================================================")
     
-def kuitansi_postpaid(email, tanggal, total, kwh):
+def kuitansi_postpaid(email, tanggal, total, bayar, sisa_tagihan, kwh):
     print("\n========== Kuitansi Pembayaran Tagihan Listrik ==========")
     print("Tanggal Pembayaran    :", tanggal)
     print("Email Pembeli         :", email)
     print("Total Tagihan         :", total)
+    print('Nominal pembayaran    :', bayar)
+    print('Sisa tagihan          :', sisa_tagihan)
     print("Jumlah Pemakaian (kWh):", kwh)
     print("=========================================================")
 
