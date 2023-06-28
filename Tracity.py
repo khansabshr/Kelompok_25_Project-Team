@@ -203,6 +203,8 @@ def prepaid():
         time.sleep(2)
         print(f"Pembayaran kartu kredit {fonts('berhasil', color='blue')}")
         print("Token anda sekarang :", token_sekarang)
+        kuitansi_prepaid(email, tanggal, bayar, token_sekarang)
+        transaksi_prepaid(email, tanggal, bayar, token_sekarang)
         ask = input(fonts('Tekan enter untuk kembali ke halaman utama', color='yellow', style='italic'))
         if ask == '':
             print(fonts("Kembali ke halaman utama...", color='yellow', style='italic'))
@@ -212,15 +214,14 @@ def prepaid():
     else:
         token_sekarang = sisa_token
         print('Token anda sekarang :', token_sekarang)
+        kuitansi_prepaid(email, tanggal, bayar, token_sekarang)
+        transaksi_prepaid(email, tanggal, bayar, token_sekarang)
         ask = input(fonts('Tekan enter untuk kembali ke halaman utama', color='yellow', style='italic'))
         if ask == '':
             print(fonts("Kembali ke halaman utama...", color='yellow', style='italic'))
             time.sleep(2)
             os.system('cls')
             home2()
-    with open('Prepaid.txt', 'a') as file:
-        file.write(f"\n{email},{tanggal},{bayar},{token_sekarang}")
-    exit()
 
 sisa_tagihan = 0
 
@@ -253,8 +254,11 @@ def postpaid():
         print(fonts("\nPembayaran Anda sedang diproses...", color='yellow', style='italic'))
         time.sleep(2)
         print(f"Pembayaran kartu kredit {fonts('berhasil', color='blue')}")
+        transaksi_postpaid(email, tanggal, total, kwh)
         if sisa_tagihan <= 0 :
             print("Tagihan Anda sudah terbayar penuh")
+            kuitansi_postpaid(email, tanggal, total, kwh)
+            transaksi_postpaid(email, tanggal, total, kwh)
             ask = input(fonts('Tekan enter untuk kembali ke halaman utama', color='yellow', style='italic'))
             if ask == '':
                 print(fonts("Kembali ke halaman utama...", color='yellow', style='italic'))
@@ -263,6 +267,8 @@ def postpaid():
                 home2()
         else:
             print("Sisa tagihan Anda sebesar Rp", sisa_tagihan)
+            kuitansi_postpaid(email, tanggal, total, kwh)
+            transaksi_postpaid(email, tanggal, total, kwh)
             ask = input(fonts('Tekan enter untuk kembali ke halaman utama', color='yellow', style='italic'))
             if ask == '':
                 print(fonts("Kembali ke halaman utama...", color='yellow', style='italic'))
@@ -271,15 +277,15 @@ def postpaid():
                 home2()
     else:
         print("Sisa tagihan Anda sebesar Rp", total)
+        kuitansi_postpaid(email, tanggal, total, kwh)
+        transaksi_postpaid(email, tanggal, total, kwh)
         ask = input(fonts('Tekan enter untuk kembali ke halaman utama', color='yellow', style='italic'))
         if ask == '':
             print(fonts("Kembali ke halaman utama...", color='yellow', style='italic'))
             time.sleep(2)
             os.system('cls')
             home2()
-    with open('Postpaid.txt', 'a') as file:
-        file.write(f"\n{email},{tanggal},{total},{kwh}")
-
+   
 def riwayat_prepaid():
     email = email_login
     data1 = []
