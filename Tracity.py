@@ -101,6 +101,7 @@ def masuk():
 
 def logout():
     print('Anda berhasil logout.\n')
+    time.sleep(2)
     print('\n\n========== Track Your Electricity ==========')
     home()
 
