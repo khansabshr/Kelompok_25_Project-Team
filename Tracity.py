@@ -217,7 +217,7 @@ def prepaid():
         print(f"Pembayaran kartu kredit {fonts('berhasil', color='blue')}")
         kuitansi_prepaid(email, tanggal, bayar, token_sekarang)
         transaksi_prepaid(email, tanggal, bayar, token_sekarang)
-        ask = print(fonts('Tekan Enter untuk kembali ke halaman utama\nTekan Esc untuk logout', color='yellow', style='italic'))
+        print(fonts('Tekan Enter untuk kembali ke halaman utama\nTekan Esc untuk logout', color='yellow', style='italic'))
         while True:
             key = ord(msvcrt.getch())
             if key == 13:  
@@ -229,12 +229,12 @@ def prepaid():
                 logout()
             else:
                 print('Input tidak valid!')
-                ask = print(fonts('Tekan Enter untuk kembali ke halaman utama\nTekan Esc untuk logout', color='yellow', style='italic'))
+                print(fonts('Tekan Enter untuk kembali ke halaman utama\nTekan Esc untuk logout', color='yellow', style='italic'))
     else:
         token_sekarang = sisa_token
         kuitansi_prepaid(email, tanggal, bayar, token_sekarang)
         transaksi_prepaid(email, tanggal, bayar, token_sekarang)
-        ask = print(fonts('Tekan Enter untuk kembali ke halaman utama\nTekan Esc untuk logout', color='yellow', style='italic'))
+        print(fonts('Tekan Enter untuk kembali ke halaman utama\nTekan Esc untuk logout', color='yellow', style='italic'))
         while True:
             key = ord(msvcrt.getch())
             if key == 13:  
@@ -246,7 +246,7 @@ def prepaid():
                 logout()
             else:
                 print('Input tidak valid!')
-                ask = print(fonts('Tekan Enter untuk kembali ke halaman utama\nTekan Esc untuk logout', color='yellow', style='italic'))
+                print(fonts('Tekan Enter untuk kembali ke halaman utama\nTekan Esc untuk logout', color='yellow', style='italic'))
 
 sisa_tagihan = 0
 
@@ -286,7 +286,7 @@ def postpaid():
             print("Tagihan Anda sudah terbayar penuh")
             kuitansi_postpaid(email, tanggal, total, bayar, sisa_tagihan, kwh)
             transaksi_postpaid(email, tanggal, total, kwh)
-            ask = print(fonts('Tekan Enter untuk kembali ke halaman utama\nTekan Esc untuk logout', color='yellow', style='italic'))
+            print(fonts('Tekan Enter untuk kembali ke halaman utama\nTekan Esc untuk logout', color='yellow', style='italic'))
             while True:
                 key = ord(msvcrt.getch())
                 if key == 13:  
@@ -298,12 +298,12 @@ def postpaid():
                     logout()
                 else:
                     print('Input tidak valid!')
-                    ask = print(fonts('Tekan Enter untuk kembali ke halaman utama\nTekan Esc untuk logout', color='yellow', style='italic'))
+                    print(fonts('Tekan Enter untuk kembali ke halaman utama\nTekan Esc untuk logout', color='yellow', style='italic'))
         else:
             print("Sisa tagihan Anda sebesar Rp", sisa_tagihan)
             kuitansi_postpaid(email, tanggal, total, bayar, sisa_tagihan, kwh)
             transaksi_postpaid(email, tanggal, total, kwh)
-            ask = print(fonts('Tekan Enter untuk kembali ke halaman utama\nTekan Esc untuk logout', color='yellow', style='italic'))
+            print(fonts('Tekan Enter untuk kembali ke halaman utama\nTekan Esc untuk logout', color='yellow', style='italic'))
             while True:
                 key = ord(msvcrt.getch())
                 if key == 13:  
@@ -315,7 +315,7 @@ def postpaid():
                     logout()
                 else:
                     print('Input tidak valid!')
-                    ask = print(fonts('Tekan Enter untuk kembali ke halaman utama\nTekan Esc untuk logout', color='yellow', style='italic'))
+                    print(fonts('Tekan Enter untuk kembali ke halaman utama\nTekan Esc untuk logout', color='yellow', style='italic'))
     else:
         if bayar == 0:
             sisa_tagihan = total
@@ -324,7 +324,7 @@ def postpaid():
         print("Sisa tagihan Anda sebesar Rp", total)
         kuitansi_postpaid(email, tanggal, total, bayar, sisa_tagihan, kwh)
         transaksi_postpaid(email, tanggal, total, kwh)
-        ask = print(fonts('Tekan Enter untuk kembali ke halaman utama\nTekan Esc untuk logout', color='yellow', style='italic'))
+        print(fonts('Tekan Enter untuk kembali ke halaman utama\nTekan Esc untuk logout', color='yellow', style='italic'))
         while True:
             key = ord(msvcrt.getch())
             if key == 13:  
@@ -336,7 +336,7 @@ def postpaid():
                 logout()
             else:
                 print('Input tidak valid!')
-                ask = print(fonts('Tekan Enter untuk kembali ke halaman utama\nTekan Esc untuk logout', color='yellow', style='italic'))
+                print(fonts('Tekan Enter untuk kembali ke halaman utama\nTekan Esc untuk logout', color='yellow', style='italic'))
    
 def riwayat_prepaid():
     email = email_login
