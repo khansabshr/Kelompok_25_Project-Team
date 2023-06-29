@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import time
 import os
 import sys
+import msvcrt
 import datetime
 
 def welcome_message():
@@ -37,26 +38,20 @@ def home():
     while True:
         print(f"{fonts('[1]', color='pink')} Masuk  (login)")
         print(f"{fonts('[2]', color='pink')} Daftar (sign up)")
-        print(f"{fonts('[3]', color='pink')} Keluar (logout)")  
-        print(fonts('Tekan enter untuk keluar dari program', color='yellow', style='italic'))
+        print(fonts('Tekan Esc untuk keluar dari program', color='yellow', style='italic'))
+        print('Silakan pilih    : ')
         try:
-            pilih = input('Silakan pilih    : ')
-            if pilih == '1':
-                masuk()
-                break
-            elif pilih == '2':
-                daftar()
-            elif pilih == '3':
-                logout()
-            elif pilih == '':
-                os.system('cls')
-                print('Terimakasih telah menggunakan Tracity!')
-                exit()
-            else:
-                raise ValueError
+            while True:
+                key = ord(msvcrt.getch())
+                if key == 27: 
+                    print('Terimakasih telah menggunakan Tracity!')
+                elif key == 49:  
+                    masuk()
+                    break
+                elif key == 50:  
+                    daftar()
         except ValueError:
-            print(f"Maaf, pilihan {pilih} tidak tersedia.")
-            print('Silakan coba lagi\n')
+            print("Maaf, input tidak valid. Silakan coba lagi.\n")
             
 def daftar():
     print('\n===============  Daftar Akun ===============')
@@ -104,18 +99,10 @@ def masuk():
         print("Email belum terdaftar.\n")
     home()
 
-email_login = None                                      
-
 def logout():
-    global email_login
-    if email_login is None:
-        print("Anda belum login.\n")
-    else:
-        email_login = None
-        print('Anda berhasil logout.\n')                
-        time.sleep(2)
-        os.system('cls')
-        home()
+    print('Anda berhasil logout.\n')
+    print('\n\n========== Track Your Electricity ==========')
+    home()
 
 def home2():
     while True:
@@ -208,22 +195,36 @@ def prepaid():
         print(f"Pembayaran kartu kredit {fonts('berhasil', color='blue')}")
         kuitansi_prepaid(email, tanggal, bayar, token_sekarang)
         transaksi_prepaid(email, tanggal, bayar, token_sekarang)
-        ask = input(fonts('Tekan enter untuk kembali ke halaman utama', color='yellow', style='italic'))
-        if ask == '':
-            print(fonts("Kembali ke halaman utama...", color='yellow', style='italic'))
-            time.sleep(2)
-            os.system('cls')
-            home2()
+        ask = print(fonts('Tekan Enter untuk kembali ke halaman utama\nTekan Esc untuk logout', color='yellow', style='italic'))
+        while True:
+            key = ord(msvcrt.getch())
+            if key == 13:  
+                print(fonts("Kembali ke halaman utama...", color='yellow', style='italic'))
+                time.sleep(2)
+                os.system('cls')
+                home2()
+            elif key == 27:  
+                logout()
+            else:
+                print('Input tidak valid!')
+                ask = print(fonts('Tekan Enter untuk kembali ke halaman utama\nTekan Esc untuk logout', color='yellow', style='italic'))
     else:
         token_sekarang = sisa_token
         kuitansi_prepaid(email, tanggal, bayar, token_sekarang)
         transaksi_prepaid(email, tanggal, bayar, token_sekarang)
-        ask = input(fonts('Tekan enter untuk kembali ke halaman utama', color='yellow', style='italic'))
-        if ask == '':
-            print(fonts("Kembali ke halaman utama...", color='yellow', style='italic'))
-            time.sleep(2)
-            os.system('cls')
-            home2()
+        ask = print(fonts('Tekan Enter untuk kembali ke halaman utama\nTekan Esc untuk logout', color='yellow', style='italic'))
+        while True:
+            key = ord(msvcrt.getch())
+            if key == 13:  
+                print(fonts("Kembali ke halaman utama...", color='yellow', style='italic'))
+                time.sleep(2)
+                os.system('cls')
+                home2()
+            elif key == 27:  
+                logout()
+            else:
+                print('Input tidak valid!')
+                ask = print(fonts('Tekan Enter untuk kembali ke halaman utama\nTekan Esc untuk logout', color='yellow', style='italic'))
 
 sisa_tagihan = 0
 
@@ -263,22 +264,36 @@ def postpaid():
             print("Tagihan Anda sudah terbayar penuh")
             kuitansi_postpaid(email, tanggal, total, bayar, sisa_tagihan, kwh)
             transaksi_postpaid(email, tanggal, total, kwh)
-            ask = input(fonts('Tekan enter untuk kembali ke halaman utama', color='yellow', style='italic'))
-            if ask == '':
-                print(fonts("Kembali ke halaman utama...", color='yellow', style='italic'))
-                time.sleep(2)
-                os.system('cls')
-                home2()
+            ask = print(fonts('Tekan Enter untuk kembali ke halaman utama\nTekan Esc untuk logout', color='yellow', style='italic'))
+            while True:
+                key = ord(msvcrt.getch())
+                if key == 13:  
+                    print(fonts("Kembali ke halaman utama...", color='yellow', style='italic'))
+                    time.sleep(2)
+                    os.system('cls')
+                    home2()
+                elif key == 27:  
+                    logout()
+                else:
+                    print('Input tidak valid!')
+                    ask = print(fonts('Tekan Enter untuk kembali ke halaman utama\nTekan Esc untuk logout', color='yellow', style='italic'))
         else:
             print("Sisa tagihan Anda sebesar Rp", sisa_tagihan)
             kuitansi_postpaid(email, tanggal, total, bayar, sisa_tagihan, kwh)
             transaksi_postpaid(email, tanggal, total, kwh)
-            ask = input(fonts('Tekan enter untuk kembali ke halaman utama', color='yellow', style='italic'))
-            if ask == '':
-                print(fonts("Kembali ke halaman utama...", color='yellow', style='italic'))
-                time.sleep(2)
-                os.system('cls')
-                home2()
+            ask = print(fonts('Tekan Enter untuk kembali ke halaman utama\nTekan Esc untuk logout', color='yellow', style='italic'))
+            while True:
+                key = ord(msvcrt.getch())
+                if key == 13:  
+                    print(fonts("Kembali ke halaman utama...", color='yellow', style='italic'))
+                    time.sleep(2)
+                    os.system('cls')
+                    home2()
+                elif key == 27:  
+                    logout()
+                else:
+                    print('Input tidak valid!')
+                    ask = print(fonts('Tekan Enter untuk kembali ke halaman utama\nTekan Esc untuk logout', color='yellow', style='italic'))
     else:
         if bayar == 0:
             sisa_tagihan = total
@@ -287,12 +302,19 @@ def postpaid():
         print("Sisa tagihan Anda sebesar Rp", total)
         kuitansi_postpaid(email, tanggal, total, bayar, sisa_tagihan, kwh)
         transaksi_postpaid(email, tanggal, total, kwh)
-        ask = input(fonts('Tekan enter untuk kembali ke halaman utama', color='yellow', style='italic'))
-        if ask == '':
-            print(fonts("Kembali ke halaman utama...", color='yellow', style='italic'))
-            time.sleep(2)
-            os.system('cls')
-            home2()
+        ask = print(fonts('Tekan Enter untuk kembali ke halaman utama\nTekan Esc untuk logout', color='yellow', style='italic'))
+        while True:
+            key = ord(msvcrt.getch())
+            if key == 13:  
+                print(fonts("Kembali ke halaman utama...", color='yellow', style='italic'))
+                time.sleep(2)
+                os.system('cls')
+                home2()
+            elif key == 27:  
+                logout()
+            else:
+                print('Input tidak valid!')
+                ask = print(fonts('Tekan Enter untuk kembali ke halaman utama\nTekan Esc untuk logout', color='yellow', style='italic'))
    
 def riwayat_prepaid():
     email = email_login
