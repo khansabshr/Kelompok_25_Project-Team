@@ -45,6 +45,7 @@ def home():
                 key = ord(msvcrt.getch())
                 if key == 27: 
                     print('Terimakasih telah menggunakan Tracity!')
+                    exit()
                 elif key == 49:  
                     masuk()
                     break
