@@ -235,7 +235,6 @@ def prepaid():
     else:
         token_sekarang = sisa_token
         kuitansi_prepaid(email, tanggal, bayar, token_sekarang)
-        transaksi_prepaid(email, tanggal, bayar, token_sekarang)
         print(fonts('Tekan Enter untuk kembali ke halaman utama\nTekan Esc untuk logout', color='yellow', style='italic'))
         while True:
             key = ord(msvcrt.getch())
