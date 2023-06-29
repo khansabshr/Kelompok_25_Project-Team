@@ -174,22 +174,40 @@ def prepaid():
     email = email_login
     tanggal = datetime.date.today()
     pulsa_awal = pulsa("Masukkan pulsa awal     : ")
-    token_awal = pulsa_awal/2000
+    token_awal = pulsa_awal / 2000
     print("Token awal Anda         : ", token_awal)
     pemakaian_listrik = nominal("Masukkan jumlah pemakaian listrik dalam kWh     : ")
     bayar = 0
-    sisa_token = 0 
+    sisa_token = 0
     while pemakaian_listrik > token_awal:
-        print(f"Pulsa anda tidak mencukupi. Pembelian maksimal untuk {token_awal} kwh\n")
+        print(f"Pulsa anda tidak mencukupi. Pembelian maksimal untuk {token_awal} kWh\n")
         time.sleep(1)
         pemakaian_listrik = nominal("Masukkan jumlah pemakaian listrik dalam kWh     : ")
     sisa_token = token_awal - pemakaian_listrik
     print("Sisa token Anda     :", sisa_token)
+    token_options = {
+        20_000: 15,
+        50_000: 30,
+        100_000: 60,
+        250_000: 120,
+        500_000: 240,
+        1_000_000: 480,
+        5_000_000: 960,
+        10_000_000: 1920,
+    }
     pembayaran = input_yn("Apakah Anda ingin melakukan pembelian token? (Y/N): ")
     if pembayaran == "y":
         nomor_kartu_kredit = input_kredit("Masukkan nomor kartu kredit: ")
-        bayar = pulsa('Masukkan nominal pembayaran: ')
-        token_sekarang = (bayar/2000) + sisa_token
+        print("Pilihan Token:")
+        for denomination, kwh_value in token_options.items():
+            print(f"{denomination}: {kwh_value} kWh")
+        selected_denomination = int(input("Masukkan nominal token yang ingin Anda beli: "))
+        while selected_denomination not in token_options:
+            print("Pilihan token tidak valid. Silakan coba lagi.")
+            selected_denomination = int(input("Masukkan nominal token yang ingin Anda beli: "))
+        kwh_bonus = token_options[selected_denomination]
+        bayar = selected_denomination + 2500
+        token_sekarang = (bayar / 2000) + sisa_token + kwh_bonus
         print(fonts("\nPembayaran Anda sedang diproses...", color='yellow', style='italic'))
         time.sleep(2)
         print(f"Pembayaran kartu kredit {fonts('berhasil', color='blue')}")
