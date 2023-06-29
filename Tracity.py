@@ -103,6 +103,7 @@ def masuk():
 def logout():
     print('Anda berhasil logout.\n')
     time.sleep(2)
+    os.system('cls')
     print('\n\n========== Track Your Electricity ==========')
     home()
 
