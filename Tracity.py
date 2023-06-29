@@ -153,21 +153,24 @@ def riwayat():
         print('\n=================  Riwayat  ================')
         print(f"{fonts('[1]', color='pink')} Riwayat Prepaid")
         print(f"{fonts('[2]', color='pink')} Riwayat Postpaid")
-        print(fonts('Tekan enter untuk kembali ke halaman sebelumnya', color='yellow', style='italic'))
+        print(fonts('Tekan Enter untuk kembali ke halaman utama\nTekan Esc untuk logout', color='yellow', style='italic'))
+        print('Silakan pilih    : ')
         try:
-            pilih = input('Silakan pilih    : ')
-            if pilih == '1':
-                riwayat_prepaid()                                            
-            elif pilih == '2':
-                riwayat_postpaid()
-            elif pilih == '':
-                os.system('cls')
-                time.sleep(2)
-                home2()
-            else :
-                raise ValueError
+            while True:
+                key = ord(msvcrt.getch())
+                if key == 49:
+                    riwayat_prepaid()                                            
+                elif key == 50:
+                    riwayat_postpaid()
+                elif key == 13:  
+                    print(fonts("Kembali ke halaman utama...", color='yellow', style='italic'))
+                    time.sleep(2)
+                    os.system('cls')
+                    home2()
+                elif key == 27:  
+                    logout()
         except ValueError:
-            print(f"Maaf, pilihan {pilih} tidak tersedia.")
+            print("Maaf, input tidak valid")
             print('Silakan coba lagi\n')   
 
 def prepaid():
@@ -207,7 +210,7 @@ def prepaid():
             selected_denomination = int(input("Masukkan nominal token yang ingin Anda beli: "))
         kwh_bonus = token_options[selected_denomination]
         bayar = selected_denomination + 2500
-        token_sekarang = (bayar / 2000) + sisa_token + kwh_bonus
+        token_sekarang = sisa_token + kwh_bonus
         print(fonts("\nPembayaran Anda sedang diproses...", color='yellow', style='italic'))
         time.sleep(2)
         print(f"Pembayaran kartu kredit {fonts('berhasil', color='blue')}")
